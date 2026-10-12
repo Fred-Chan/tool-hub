@@ -4,11 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ITCCC 工具箱 · Tool Hub</title>
-<meta name="description" content="ITCCC 工作相关 AI 编码（vibecoding）产出索引：描述、用法与界面截图。">
+<meta name="description" content="ITCCC 工作相关 AI 编码（vibecoding）产出索引：描述、用法、界面截图与原始笔记。">
 <style>
 :root{
   --bg:#f7f6f3; --card:#ffffff; --ink:#1c1b18; --ink2:#6b675f; --line:#e6e2da;
-  --accent:#b3541e; --accent2:#8a3d12; --green:#1a7f4e; --blue:#1f5fa8; --gold:#9a7b16; --red:#b3423d;
+  --accent:#b3541e; --accent2:#8a3d12; --green:#1a7f4e; --gold:#9a7b16; --red:#b3423d;
+  --side:#f1efe9;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -16,62 +17,83 @@ body{margin:0;background:var(--bg);color:var(--ink);
   font-family:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
   font-size:15px;line-height:1.65}
 a{color:inherit}
-.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.wrap{max-width:1280px;margin:0 auto;padding:0 24px}
 /* ---------- hero ---------- */
-.hero{border-bottom:1px solid var(--line);padding:56px 0 28px;background:var(--bg)}
-.kicker{font-size:12px;letter-spacing:.22em;color:var(--accent);margin:0 0 10px;font-weight:600}
-.hero h1{font-size:clamp(34px,5vw,52px);line-height:1.15;margin:0 0 14px;font-weight:800;letter-spacing:.01em}
-.hero .sub{max-width:640px;color:var(--ink2);margin:0 0 22px}
-.hero .sub code{background:#efece6;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:12.5px}
-.stats{display:flex;gap:28px;flex-wrap:wrap;margin-bottom:22px}
-.stats b{font-size:26px;font-weight:800;display:block;line-height:1.2}
-.stats span{font-size:12.5px;color:var(--ink2)}
-.searchbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-#q{flex:1;min-width:240px;max-width:420px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;
+.hero{border-bottom:1px solid var(--line);padding:44px 0 22px;background:var(--bg)}
+.kicker{font-size:12px;letter-spacing:.22em;color:var(--accent);margin:0 0 8px;font-weight:600}
+.hero h1{font-size:clamp(30px,4.4vw,44px);line-height:1.15;margin:0 0 16px;font-weight:800}
+.stats{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:18px}
+.stats b{font-size:24px;font-weight:800;display:block;line-height:1.2}
+.stats span{font-size:12px;color:var(--ink2)}
+#q{width:100%;max-width:460px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;
   background:var(--card);font-size:14px;outline:none}
 #q:focus{border-color:var(--accent)}
-#chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
-.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:5px 13px;font-size:12.5px;
-  cursor:pointer;color:var(--ink2);transition:.15s}
-.chip:hover{border-color:var(--accent);color:var(--accent)}
-.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
-/* ---------- sections & cards ---------- */
-section{padding:34px 0 6px}
-section h2{font-size:20px;font-weight:800;margin:0 0 4px;display:flex;align-items:baseline;gap:10px}
-section h2 small{font-size:12.5px;color:var(--ink2);font-weight:400}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px;margin-top:16px}
+/* ---------- layout ---------- */
+.layout{display:flex;gap:34px;align-items:flex-start;padding:26px 0 60px}
+aside{width:236px;flex:none;position:sticky;top:18px;max-height:calc(100vh - 36px);overflow-y:auto;
+  background:var(--side);border:1px solid var(--line);border-radius:14px;padding:18px 16px}
+aside h4{font-size:11px;letter-spacing:.18em;color:var(--ink2);margin:0 0 8px;font-weight:700}
+aside .group{margin-bottom:20px}
+aside .group:last-child{margin-bottom:0}
+.fitem{display:flex;align-items:center;gap:8px;width:100%;text-align:left;border:0;background:transparent;
+  padding:6px 10px;border-radius:8px;font-size:13.5px;cursor:pointer;color:var(--ink);font-family:inherit}
+.fitem:hover{background:#e7e4dc}
+.fitem.on{background:var(--ink);color:#fff}
+.fitem .cnt{margin-left:auto;font-size:11.5px;color:inherit;opacity:.55}
+.fitem.on .cnt{opacity:.8}
+.tagpool{display:flex;flex-wrap:wrap;gap:6px}
+.tagbtn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:2.5px 10px;
+  font-size:11.5px;cursor:pointer;color:var(--ink2);font-family:inherit;transition:.12s}
+.tagbtn:hover{border-color:var(--accent);color:var(--accent)}
+.tagbtn.on{background:var(--accent);border-color:var(--accent);color:#fff}
+main{flex:1;min-width:0}
+section{padding:6px 0 18px}
+section h2{font-size:19px;font-weight:800;margin:14px 0 12px;display:flex;align-items:baseline;gap:9px}
+section h2 small{font-size:12px;color:var(--ink2);font-weight:400}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px}
+/* ---------- card ---------- */
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;
   display:flex;flex-direction:column;transition:box-shadow .18s,transform .18s}
 .card:hover{box-shadow:0 10px 28px rgba(28,27,24,.09);transform:translateY(-2px)}
-.shot{position:relative;aspect-ratio:16/10;background:#efece6;overflow:hidden;cursor:pointer}
+.shot{aspect-ratio:16/10;background:#efece6;overflow:hidden}
 .shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
 .ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#a39e93}
-.ph em{font-style:normal;font-size:34px}
-.ph span{font-size:12px;letter-spacing:.08em}
-.body{padding:16px 18px 14px;display:flex;flex-direction:column;flex:1}
+.ph em{font-style:normal;font-size:32px}
+.ph span{font-size:11.5px;letter-spacing:.08em}
+.body{padding:15px 17px 0;display:flex;flex-direction:column;flex:1}
 .titlerow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.titlerow h3{margin:0;font-size:16.5px;font-weight:700}
+.titlerow h3{margin:0;font-size:16px;font-weight:700}
 .date{font-size:11.5px;color:var(--ink2);font-weight:400}
 .badge{font-size:10.5px;font-weight:700;border-radius:999px;padding:2px 9px;letter-spacing:.04em}
 .b-live{background:#e5f3ec;color:var(--green)}
 .b-internal{background:#ece9e2;color:var(--ink2)}
 .b-idea{background:#f6efd8;color:var(--gold)}
 .b-paused{background:#f7e4e2;color:var(--red)}
-.desc{color:#3d3a34;font-size:13.5px;margin:8px 0 0}
-.how{font-size:12.5px;color:var(--ink2);margin:8px 0 0;padding-left:10px;border-left:3px solid var(--line)}
+.desc{color:#3d3a34;font-size:13px;margin:7px 0 0}
+.how{font-size:12px;color:var(--ink2);margin:7px 0 0;padding-left:9px;border-left:3px solid var(--line)}
 .how b{color:var(--accent2);font-weight:700;margin-right:4px}
-.links{margin-top:auto;padding-top:14px;display:flex;gap:8px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;text-decoration:none;
-  border-radius:8px;padding:6px 12px;border:1px solid var(--line);background:#fff;color:var(--ink);transition:.15s}
-.btn:hover{border-color:var(--accent);color:var(--accent)}
-.btn.primary{background:var(--ink);border-color:var(--ink);color:#fff}
-.btn.primary:hover{background:var(--accent2);border-color:var(--accent2);color:#fff}
-.nolink{font-size:12px;color:#b6b1a6;align-self:center}
-footer{border-top:1px solid var(--line);margin-top:44px;padding:26px 0 60px;color:var(--ink2);font-size:13px}
-footer code{background:#efece6;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:12px}
-footer a{color:var(--accent)}
+.tagrow{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 12px}
+.tagrow .t{border:1px solid var(--line);background:#faf9f6;border-radius:999px;padding:1.5px 9px;
+  font-size:11px;color:var(--ink2);cursor:pointer;font-family:inherit}
+.tagrow .t:hover{border-color:var(--accent);color:var(--accent)}
+.tagrow .t.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.cardfoot{margin-top:auto;border-top:1px dashed var(--line);padding:8px 17px;display:flex;
+  align-items:center;justify-content:space-between;gap:10px}
+.notebtn{font-size:11.5px;color:var(--ink2);text-decoration:none}
+.notebtn:hover{color:var(--accent)}
+.siteurl{font-size:12px;font-weight:600;color:var(--accent);text-decoration:none;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.siteurl:hover{text-decoration:underline}
+.nosite{font-size:11.5px;color:#b6b1a6}
 .empty{color:var(--ink2);padding:30px 0;display:none}
-@media (max-width:640px){.grid{grid-template-columns:1fr}.hero{padding-top:40px}}
+footer{border-top:1px solid var(--line);margin-top:10px;padding:24px 0 60px;color:var(--ink2);font-size:12.5px}
+footer a{color:var(--accent)}
+@media (max-width:920px){
+  .layout{flex-direction:column;gap:18px}
+  aside{position:static;width:100%;max-height:none}
+  aside .group{margin-bottom:14px}
+  .tagpool{max-height:none}
+}
 </style>
 </head>
 <body>
@@ -80,394 +102,425 @@ footer a{color:var(--accent)}
   <div class="wrap">
     <p class="kicker">ITCCC · VIBECODING TOOL HUB</p>
     <h1>工具箱</h1>
-    <p class="sub">2026 年 3 月以来的工作相关 AI 编码（#vibecoding）产出索引，每条含描述、用法与界面截图。维护方式：编辑本文件中的 <code>TOOLS</code> 数组加一行，push 后自动部署。</p>
     <div class="stats" id="stats"></div>
-    <div class="searchbar">
-      <input id="q" type="search" placeholder="搜索工具名、描述、用法…">
-    </div>
-    <nav id="chips"></nav>
+    <input id="q" type="search" placeholder="搜索工具名、描述、用法…">
   </div>
 </header>
 
-<main class="wrap" id="main"></main>
-<p class="empty wrap" id="empty">没有匹配的工具，换个关键词试试。</p>
+<div class="wrap">
+  <div class="layout">
+    <aside id="side"></aside>
+    <main>
+      <div id="main"></div>
+      <p class="empty" id="empty">没有匹配的工具，换个条件试试。</p>
+    </main>
+  </div>
+</div>
 
 <footer>
   <div class="wrap">
-    <p><b>如何新增条目</b>：在 <code>index.html</code> 的 <code>TOOLS</code> 数组末尾加一行（名称 / 分类 / 状态 / 描述 / 用法 / 链接 / 截图文件名 / flomo 笔记 id），提交到 GitHub 后 Vercel 自动重新部署。截图放 <code>screenshots/</code> 目录（1280×800 JPG）。</p>
-    <p>仓库：<a id="repo-link" href="https://github.com/Fred-Chan/tool-hub">github.com/Fred-Chan/tool-hub</a> · 生成于 2026-10-12 · 由 ZCode 从 flomo #vibecoding 笔记汇总</p>
+    <p><b>如何新增条目</b>：在 <code>index.html</code> 的 <code>TOOLS</code> 数组末尾加一行（名称 / 分类 / 状态 / 标签 / 描述 / 用法 / 链接 / 截图 / 笔记 id），提交到 GitHub 后 Vercel 自动重新部署。截图放 <code>screenshots/</code>（1280×800 JPG）。</p>
+    <p>仓库：<a href="https://github.com/Fred-Chan/tool-hub">github.com/Fred-Chan/tool-hub</a> · 更新于 2026-10-12 · 由 ZCode 从 flomo #vibecoding 笔记汇总</p>
   </div>
 </footer>
 
 <script>
 /* ============================================================
-   TOOLS 字段说明（加行即可新增）：
-   c:   分类 id（见 CATS）
-   n:   工具名
-   d:   时间（YYYY-MM）
-   s:   状态 live=已上线 | internal=内部/本地 | idea=想法/未启动 | paused=挂起
-   desc:一句话描述（是什么）
-   how: 怎么用（操作路径）
-   url: 线上地址（没有就省略）
-   shot:截图文件名（screenshots/ 下，没有就省略）
-   notes:[{t:"标签",id:"flomo memo id"}] 原始笔记链接
+   TOOLS 字段（加行即可新增）：
+   c:分类id  n:名称  d:时间  s:状态 live/internal/idea/paused
+   tags:[标签…]  desc:描述  how:怎么用
+   url:线上地址(可省)  shot:截图文件名(可省)
+   notes:[{t:"标签",id:"flomo memo id"}]
 ============================================================ */
 const CATS = [
-  {id:"jbc",   name:"JBC 命题与质检"},
-  {id:"live",  name:"成绩与现场"},
-  {id:"cert",  name:"证书与查询"},
-  {id:"web",   name:"对外网站"},
-  {id:"props", name:"道具与周边"},
-  {id:"data",  name:"数据与调研"},
-  {id:"travel",name:"护照与出行"},
-  {id:"ops",   name:"内部运营"},
+  {id:"jbc",   icon:"🧩", name:"命题与质检"},
+  {id:"live",  icon:"🏟️", name:"成绩与现场"},
+  {id:"cert",  icon:"🏅", name:"证书与查询"},
+  {id:"web",   icon:"🌐", name:"对外网站"},
+  {id:"props", icon:"🎽", name:"道具与周边"},
+  {id:"data",  icon:"📊", name:"数据与调研"},
+  {id:"travel",icon:"🛂", name:"护照与出行"},
+  {id:"ops",   icon:"🧰", name:"内部运营"},
+];
+const STATUSES = [
+  {id:"all",      name:"全部"},
+  {id:"live",     name:"已上线"},
+  {id:"internal", name:"内部 / 本地"},
+  {id:"idea",     name:"想法池"},
+  {id:"paused",   name:"挂起"},
 ];
 
 const TOOLS = [
-/* ---------- JBC 命题与质检 ---------- */
-{c:"jbc",n:"JBC 任务审查器",d:"2026-08/09",s:"live",
+/* ---------- 命题与质检 ---------- */
+{c:"jbc",n:"JBC 任务审查器",d:"2026-08/09",s:"live",tags:["JBC","命题出题","PPT工具"],
  desc:"拖入命题 PPTX，按 T119 八条清单自动检查：标记一致、启动标注、单次/多次话术、标点、道具图文相符、各级别题量、任务顺序、入门级子任务，审查后出报告、即弃不存文件。",
  how:"把任务 PPTX（≤4MB，《JBC任务设计模板》版式最佳）拖入上传框 → 自动检查并输出报告；大文件与完整功能用本机版 review_web/server.py。",
  url:"https://jbc-task-checker.itccc.app/",shot:"jbc-task-checker.jpg",
  notes:[{t:"T017",id:"MjUzNDA3NDQ1"},{t:"0917",id:"MjU2OTk0NDUz"}]},
-{c:"jbc",n:"JBC 任务生成器",d:"2026-09",s:"internal",
+{c:"jbc",n:"JBC 任务生成器",d:"2026-09",s:"internal",tags:["JBC","命题出题","生成器","ZCode"],
  desc:"ZCode 本地项目：输入变量按模板全自动生成任务稿、无需人工二次加工；因导出需调用本地 LibreOffice，不适合做成线上工具。10 月起进入排版细节打磨（孤儿行、间距），下一步英文适配。",
  how:"本地 ZCode 会话内运行，输入变量产出任务文件（JBC_Tasks_Generator）。",
  notes:[{t:"0913",id:"MjU2NDU1OTk5"}]},
-{c:"jbc",n:"2027 开放挑战任务生成与核对",d:"2026-09",s:"internal",
+{c:"jbc",n:"2027 开放挑战任务生成与核对",d:"2026-09",s:"internal",tags:["JBC","命题出题","生成器"],
  desc:"2027 年度开放挑战（O 套题）的任务生成流水线：先出 Markdown 再出 PPT，含探索 B 任务生成器与逐份核对。",
  how:"本地流水线运行；各套产物按 output/2027/O<套> 归档。",
  notes:[{t:"0913",id:"MjU2MzU2OTg4"}]},
-{c:"jbc",n:"「今天练什么」题库生成器",d:"2026-10",s:"internal",
+{c:"jbc",n:"「今天练什么」题库生成器",d:"2026-10",s:"internal",tags:["JBC","命题出题","夜班"],
  desc:"夜班项目：输入变量按规则从题库出题，回答「JBC 今天练什么」。",
  how:"夜班批处理运行，输入变量产出训练题。",
  notes:[{t:"1006",id:"MjU5NjUxOTk4"}]},
+{c:"jbc",n:"TEEM 需求 → Stitch",d:"2026-03",s:"idea",tags:["JBC","原型"],
+ desc:"把 TEEM 的开发需求扔到 Google Stitch 里试原型。",
+ how:"待启动。",
+ notes:[{t:"T129",id:"MjI3MTU2MjI2"}]},
 
 /* ---------- 成绩与现场 ---------- */
-{c:"live",n:"Botball 成绩查询",d:"2026-04",s:"live",
+{c:"live",n:"Botball 成绩查询",d:"2026-04",s:"live",tags:["Botball","成绩统计","查询入口"],
  desc:"亚洲分会成绩查询页：按场次与级别筛选，输入队伍编号显示单队成绩；入门级显示得分，其他级别显示完成/未完成。",
  how:"输入队伍编号 → 选场次和级别 → 查询；编号支持简写。",
  url:"https://bbchengji.itccc.app",shot:"bbchengji.jpg",
  notes:[{t:"0426",id:"MjMzNTk2MDU1"}]},
-{c:"live",n:"看场记录表",d:"2026-06",s:"live",
+{c:"live",n:"看场记录表",d:"2026-06",s:"live",tags:["现场","钉钉","表单"],
  desc:"踩场/看场标准化表单：场馆基本信息、场地概况、功能区与设施等分区块填写，一键提交写入钉钉数据表，支持打印/导出 PDF。",
  how:"现场逐块填写 → 右下角「提交到钉钉数据表」；需要留档点「打印/导出PDF」。",
  url:"https://kanchang.itccc.app",shot:"kanchang.jpg",
  notes:[{t:"0614",id:"MjQxODk3NDMz"}]},
-{c:"live",n:"学术布场图生成器",d:"2026-08",s:"live",
+{c:"live",n:"学术布场图生成器",d:"2026-08",s:"live",tags:["现场","生成器","JBC"],
  desc:"上传含「裁判安排」工作表的 Excel，可视化配置场地区分，一键生成带位置表的学术布场 Excel。",
  how:"第一步上传 .xlsx → 第二步可视化配置场地区分并生成。",
  url:"https://bbxueshubuchangtu.itccc.app",shot:"bbxueshu.jpg",
  notes:[{t:"0821",id:"MjUyOTExOTk2"}]},
-{c:"live",n:"JBC 亚洲分会实时成绩系统",d:"2026-03→06",s:"internal",
+{c:"live",n:"JBC 亚洲分会实时成绩系统",d:"2026-03→06",s:"internal",tags:["JBC","成绩统计","钉钉"],
  desc:"裁判用钉钉录入、组委会多维表管理、领队独立域名查询端 + 仪表盘；赛后产出逐题难度分析用于调整下一场难度。收集→处理→仪表盘→管理端全链路可复用。",
  how:"内部系统：裁判在钉钉内打开录入表（避免微信拦截）；查询端用固定域名访问。",
- notes:[{t:"038",id:"MjI0ODI1NDcw"},{t:"0613",id:"MjQxNzk0ODg2"}]},
-{c:"live",n:"中学组计分表系统",d:"2026-04",s:"internal",
+ notes:[{t:"0308",id:"MjI0ODI1NDcw"},{t:"0613",id:"MjQxNzk0ODg2"}]},
+{c:"live",n:"中学组计分表系统",d:"2026-04",s:"internal",tags:["Botball","成绩统计","飞书"],
  desc:"Botball 中学组计分与成绩发布：飞书多维表作后台存储，含比赛模式（密码进入），Vercel 部署。",
  how:"内部使用；比赛模式下录入与发布成绩。",
  notes:[{t:"0416",id:"MjMxNzg5Nzg2"}]},
-{c:"live",n:"实时投票 / 图表",d:"2026-08",s:"internal",
+{c:"live",n:"实时投票 / 图表",d:"2026-08",s:"internal",tags:["金数据","成绩统计","自动化"],
  desc:"金数据手机号验证鉴权收集 + 外部页面定时抓取金数据做实时图表，已测试跑通；成绩统计等输入受控场景需另行设计。",
  how:"金数据表单收集 → 外部图表页定时刷新展示。",
  notes:[{t:"0806",id:"MjUwNDQwMzYy"}]},
-{c:"live",n:"ADDS 随机模块",d:"2026-05",s:"internal",
+{c:"live",n:"ADDS 随机模块",d:"2026-05",s:"internal",tags:["现场","成绩统计"],
  desc:"给计分页面增加 ADDS 随机模块：一行 8 个圆形标记（4 粉 4 蓝），按按钮随机排列。",
  how:"集成在对应计分页面中，点按钮随机。",
  notes:[{t:"0517",id:"MjM3MTA5MTk5"}]},
+{c:"live",n:"RR 循线图形生成器",d:"2026-03",s:"idea",tags:["RoboRAVE","生成器"],
+ desc:"RoboRAVE 循线项目用的图形生成器构想。",
+ how:"待启动。",
+ notes:[{t:"T135",id:"MjI0ODcwNjYw"}]},
+{c:"live",n:"视觉识别判分（技术储备）",d:"2026-03",s:"idea",tags:["JBC","智能体"],
+ desc:"多模态模型够强够快时可给 JBC Online 判分；等模型能接收 200M 视频输入、online 规模到位再启用。",
+ how:"技术储备，暂不投入。",
+ notes:[{t:"T139",id:"MjI0MjgzNjkz"}]},
+{c:"live",n:"现场三件套清单",d:"2026-04",s:"idea",tags:["现场","JBC"],
+ desc:"JBC 现场工具三件套：队伍编号系统、裁判和队伍安排表、学术布场图。",
+ how:"布场图已上线，编号系统与安排表待做。",
+ notes:[{t:"T111",id:"MjMwOTA1OTQ0"}]},
 
 /* ---------- 证书与查询 ---------- */
-{c:"cert",n:"证书表单索引 · 跨年查询",d:"2026-08",s:"live",
+{c:"cert",n:"证书表单索引 · 跨年查询",d:"2026-08",s:"live",tags:["金数据","证书","查询入口","Coze"],
  desc:"金数据账号下全部证书相关表单索引（279 个：JBC 核心 / GCER / RoboRAVE 等分类），支撑跨年检索学员获证记录；曾一次遍历 5066 个表单完成证书追踪，token 只花 2.8 元。",
  how:"打开链接 → 按分类筛选或搜索表单名 → 点「打开表单」进入对应年度查询系统。",
  url:"https://www.coze.cn/s/ay3qgvKZBkA/",shot:"coze-cert.jpg",
  notes:[{t:"0824",id:"MjUzMzc5ODg0"}]},
-{c:"cert",n:"证书 / 喜报 / 感谢信小程序",d:"2026-06",s:"internal",
+{c:"cert",n:"证书 / 喜报 / 感谢信小程序",d:"2026-06",s:"internal",tags:["证书","查询入口","微信小程序"],
  desc:"微信小程序一个入口聚合查询多张金数据表（喜报、证书、感谢信），通知直达微信。",
  how:"微信内打开小程序按入口查询。",
  notes:[{t:"0615",id:"MjQyMDU5MjI5"}]},
 
 /* ---------- 对外网站 ---------- */
-{c:"web",n:"ICMC 规则站",d:"2026-09",s:"live",
+{c:"web",n:"ICMC 规则站",d:"2026-09",s:"live",tags:["ICMC","官网页"],
  desc:"第三届至第二十届 ICMC 任务规则整理：任务背景、场地器材、比赛过程与计分，主题与奖牌样式另附；可按组别筛选，给低龄任务设计做参考。",
  how:"顶部按届次跳转，或「按组别筛选」只看 JR/机械/动力/感控/智能/编程。",
  url:"https://icmc.itccc.app",shot:"icmc.jpg",
  notes:[{t:"0911",id:"MjU2MTY0NzY1"}]},
-{c:"web",n:"Visit China 来华指南",d:"2026-09",s:"live",
+{c:"web",n:"Visit China 来华指南",d:"2026-09",s:"live",tags:["国际活动","官网页"],
  desc:"国际队伍来华实用指南：签证入境、支付、上网、交通、住宿、中文沟通，每篇标注最近核验时间；适用于所有来京国际活动。周末 Build 消耗 1.8 亿 token（约 144 元）。",
  how:"直接浏览 Guides / Cities 两个入口。",
  url:"https://visitchina.itccc.app",shot:"visitchina.jpg",
  notes:[{t:"0911",id:"MjU2MjA5OTM4"}]},
-{c:"web",n:"Future City 英文站",d:"2026-05",s:"live",
+{c:"web",n:"Future City 英文站",d:"2026-05",s:"live",tags:["官网页"],
  desc:"未来之城中国站英文官网：2026 Summer Showcase（杭州）介绍、报名与关键日期。",
  how:"直接浏览。",
  url:"https://futurecity.itccc.app",shot:"futurecity.jpg",
  notes:[{t:"0508",id:"MjM1NTg2ODEx"}]},
-{c:"web",n:"Botball PRO 结构参考",d:"2026-04",s:"live",
+{c:"web",n:"Botball PRO 结构参考",d:"2026-04",s:"live",tags:["Botball","素材库"],
  desc:"47 个全球优秀 Botball 结构视频索引（2024–2026 赛季）：热门关键词、搜索、年份筛选，附百度网盘完整包入口。",
  how:"按热门关键词或搜索框查找结构案例 → 进入条目观看/下载。",
  url:"https://botball-build.itccc.app/",shot:"botball-build.jpg",
  notes:[{t:"0416",id:"MjMxOTAxNTYz"}]},
-{c:"web",n:"队伍位置查询",d:"2026-08",s:"live",
+{c:"web",n:"队伍位置查询",d:"2026-08",s:"live",tags:["Botball","现场","查询入口"],
  desc:"2026 Botball 国际大会队伍位置查询：全场地彩色分区图 + 按姓名 / 队伍编号 / 裁判编号检索，支持 Day1/Day2 切换与缩放。",
  how:"输入姓名或队号（如 QA-001）→ 点查询 → 在地图上定位；地图可缩放。",
  url:"https://bb-team-finder.itccc.app",shot:"bb-team-finder.jpg",
  notes:[{t:"0804",id:"MjUwMTM2NDU4"}]},
-{c:"web",n:"JBC 任务打印工具",d:"2026-03",s:"live",
+{c:"web",n:"JBC 任务打印工具",d:"2026-03",s:"live",tags:["JBC","打印PDF","命题出题"],
  desc:"任务 PDF 按级别分类、四页合并为 1 页，多页输出自动拆分（入门级 A/B、PRE 自动拆为单页 PDF），并统计输出文件数。",
  how:"PowerPoint 先把任务导出为 PDF → 上传 → 配置各级别页码范围 → 生成并下载。",
  url:"https://renwudayin.itccc.app",shot:"renwudayin.jpg",
  notes:[{t:"0324",id:"MjI3ODEwNDM0"}]},
-{c:"web",n:"IEYI 作品一览查询",d:"2026-07",s:"live",
+{c:"web",n:"IEYI 作品一览查询",d:"2026-07",s:"live",tags:["IEYI","查询入口","Coze"],
  desc:"2026 IEYI 166 件作品查询：按国家/主题/组别筛选，支持关键词搜作品，可按评委编号反查负责队伍；条目展开中英双语简介。",
  how:"下拉选筛选条件或输入评委编号（如 J07）→ 查询负责队伍。",
  url:"https://www.coze.cn/s/2izdhZgxwB8/",shot:"ieyi-works.jpg",
  notes:[{t:"0731",id:"MjQ5NDExOTc3"}]},
-{c:"web",n:"IEYI 2026 官网",d:"2026-08",s:"internal",
+{c:"web",n:"IEYI 2026 官网",d:"2026-08",s:"internal",tags:["IEYI","官网页"],
  desc:"2026 IEYI 网站更新：奖项、学生与教师信息、相册、查询链接、作品照片。",
  how:"官网直接访问（地址见笔记）。",
  notes:[{t:"0809",id:"MjUwOTk0ODQ4"}]},
-{c:"web",n:"IEYI 2026 数据分析页",d:"2026-03",s:"internal",
+{c:"web",n:"IEYI 2026 数据分析页",d:"2026-03",s:"internal",tags:["IEYI","数据分析"],
  desc:"CodePilot 调 GLM5 写透视表：爬取 IEYI 日本官网 + 读取 2024 IEYI Excel，产出分析网页（IEYI_2026_website）。",
  how:"本地产出网页，用于筹备参考。",
  notes:[{t:"0304",id:"MjI0MTQzNDIx"}]},
-{c:"web",n:"RR 活动日期站",d:"2026-09",s:"internal",
+{c:"web",n:"RR 活动日期站",d:"2026-09",s:"internal",tags:["RoboRAVE","官网页"],
  desc:"参考 Luma 给 RoboRAVE 做的举办日期展示站，Workbuddy 制作；内容更新走 iPad Google Drive + Gemini 流程。",
  how:"Workbuddy 内访问维护。",
  notes:[{t:"0901",id:"MjU0NjA1MDc2"}]},
-{c:"web",n:"Botball 中学组表单 Sitemap",d:"2026-09",s:"internal",
+{c:"web",n:"Botball 中学组表单 Sitemap",d:"2026-09",s:"internal",tags:["Botball","金数据"],
  desc:"金数据中学组相关表单结构导出为本地 Sitemap HTML，便于梳理表单关系。",
  how:"本地打开 Sites/金数据MCP/Botball中学组-sitemap.html。",
  notes:[{t:"0918",id:"MjU3MjQ4MTE2"}]},
+{c:"web",n:"JBC Online 视频直传",d:"2026-03",s:"idea",tags:["JBC","金数据"],
+ desc:"替代「自建腾讯会议 + 提供录制链接」的复杂流程：用金数据 MCP 调手机录制、压缩到可控大小直接上传（迪拜 JBC 线上场要用）。",
+ how:"待启动：验证金数据附件字段 + 录制压缩链路。",
+ notes:[{t:"T127",id:"MjI3NjMzNTA1"}]},
+{c:"web",n:"报名小程序登录态",d:"2026-05",s:"idea",tags:["微信小程序"],
+ desc:"小程序有登录态后，报名状态、通知、仲裁回复可不走邮箱而走微信。",
+ how:"待启动：随报名小程序一起做。",
+ notes:[{t:"0512",id:"MjM2MjYzMzY3"}]},
+{c:"web",n:"TEEMS 品牌 app",d:"2026-05",s:"idea",tags:["品牌"],
+ desc:"把内容汇集到一个品牌 app 下的构想（参考 husky-app）。",
+ how:"待启动。",
+ notes:[{t:"0511",id:"MjM2MTIwOTM0"}]},
+{c:"web",n:"2026 IEYI newsletter",d:"2026-03",s:"idea",tags:["IEYI"],
+ desc:"2026 IEYI 新闻通讯（占位记录）。",
+ how:"待启动。",
+ notes:[{t:"0304",id:"MjI0MTY2NTg4"}]},
 
 /* ---------- 道具与周边 ---------- */
-{c:"props",n:"RR 定位精英图纸生成器",d:"2026-08",s:"live",
+{c:"props",n:"RR 定位精英图纸生成器",d:"2026-08",s:"live",tags:["RoboRAVE","生成器","道具图纸"],
  desc:"定位精英赛场图纸生成：自定义棋盘行列与分值权重（蓝50/橙20/红10/空白），拖拽换位、单击换色，中央区可上传 LOGO 与文字，导出 19193×4724 全尺寸 JPG（对应 195×48cm 打印）。",
  how:"左侧设置行列/权重/格线/字号 → 预览区拖拽与点击调整 → 满意后导出 JPG 送印。",
  url:"https://tuzhishengchengqi-rr-dingweijingying.itccc.app",shot:"rr-tuzhi.jpg",
  notes:[{t:"0828",id:"MjUzOTUwNDUz"}]},
-{c:"props",n:"奖牌奖杯授牌总览",d:"2026-08",s:"live",
+{c:"props",n:"奖牌奖杯授牌总览",d:"2026-08",s:"live",tags:["道具图纸","豆包"],
  desc:"基于钉钉文档的周边物料总览：27 条物料（奖牌/奖杯/胸章/证书等）、4 赛事品牌、104 张原始照片，按赛事/阶段/年份/类别筛选，卡片与时间线视图，支持编辑修正与本地持久化。",
  how:"打开链接 → 左侧筛选 → 卡片视图浏览；需修改进编辑模式（豆包/飞书账号）。",
  url:"https://f4u2us8y77.aiforce.cloud/app/app_17cujeacv4j",shot:"aiforce-medal.jpg",
  notes:[{t:"0825",id:"MjUzNTg2MDY2"}]},
 
 /* ---------- 数据与调研 ---------- */
-{c:"data",n:"a16z Charts 中文简报",d:"2026-08",s:"live",
+{c:"data",n:"a16z Charts 中文简报",d:"2026-08",s:"live",tags:["数据分析","素材库"],
  desc:"a16z《Charts of the Week》中文译介站：每周筛选图表，保留原始数据并补中文解读，按期次归档，仅作非商业研究学习用途。",
  how:"直接浏览各期；期次归档页可回看历史。",
  url:"https://a16z-chart.itccc.app",shot:"a16z-chart.jpg",
  notes:[{t:"0827",id:"MjUzNzcwMTg4"}]},
-{c:"data",n:"Botball 双年度数据可视化",d:"2026-08",s:"live",
+{c:"data",n:"Botball 双年度数据可视化",d:"2026-08",s:"live",tags:["Botball","数据分析","金数据","Coze"],
  desc:"2024-25 vs 2025-26 赛季深度对比可视化：开放挑战/亚洲分会/国际大会证书数、未来工程师晋级率、Pre/Pro 材料组等，数据全部来自金数据证书系统 Open API；Coze Agent Team 主子 agent 协作产出。",
  how:"打开链接浏览图表；维护方法见配套文档 coze.cn/s/vZx185Mx8ag/。",
  url:"https://www.coze.cn/s/zjgQBVZyhsE/",shot:"jbc-charts.jpg",
  notes:[{t:"0829",id:"MjU0MDkxOTYy"}]},
-{c:"data",n:"Bebras 计算思维选题报告",d:"2026-04",s:"live",
+{c:"data",n:"Bebras 计算思维选题报告",d:"2026-04",s:"live",tags:["Bebras","命题出题","Coze"],
  desc:"计算思维题目精选报告（小学 4-6 年级）：按难度分级、题目图片全嵌入，附统计卡片与快速索引，支持打印；配套众包校错机制（除虫换积分/证书/进学术委员会）。",
  how:"打开链接浏览题目与索引 → 需要纸质时直接打印。",
  url:"https://www.coze.cn/s/aFowjgxyvLo/",shot:"ct-tasks.jpg",
  notes:[{t:"0415",id:"MjMxNjM0NDk0"},{t:"0413",id:"MjMxMjM0NDM5"}]},
-{c:"data",n:"计算思维题库知识库",d:"2026-04",s:"internal",
+{c:"data",n:"计算思维题库知识库",d:"2026-04",s:"internal",tags:["Bebras","知识库"],
  desc:"Coze + 本地 Claude Code 三层架构（原始素材 / AI 整理知识 / 规则文件），操作只有录入、查询、修复；能出知识点 wiki、分析报告，还能组卷。",
  how:"Coze 云电脑（Paseo / Claude Code）内按三层结构维护。",
  notes:[{t:"T426",id:"MjMxMjM0NDM5"},{t:"T427",id:"MjMxMDQ1NDI5"}]},
-{c:"data",n:"JBC 客户画像分析",d:"2026-06",s:"internal",
+{c:"data",n:"JBC 客户画像分析",d:"2026-06",s:"internal",tags:["JBC","调研","数据分析"],
  desc:"按大区与参与级别统计机构画像：识别人数多的大机构、覆盖级别多的机构、腰部、小机构、新机构；计划叠加两年数据看增减与流失。",
  how:"把分析提示词交给 AI 产出分类统计报告。",
  notes:[{t:"0610",id:"MjQxMjIxMTQx"}]},
-{c:"data",n:"Botball 客户调研",d:"2026-06",s:"internal",
+{c:"data",n:"Botball 客户调研",d:"2026-06",s:"internal",tags:["Botball","调研"],
  desc:"AI 辅助客户调研与报告；复盘了 AI 报告的坑（基础条数错、访谈对象选错），确立「具体的活派给 AI 后台跑，人在前台做判断」的分工。",
  how:"数据给 AI 出初稿，人工复核关键结论与访谈对象。",
  notes:[{t:"0616",id:"MjQyMjMxNjEy"},{t:"0630",id:"MjQ0NDk4OTE0"}]},
-{c:"data",n:"JBC 分会数据分析工作流",d:"2026-05",s:"internal",
+{c:"data",n:"JBC 分会数据分析工作流",d:"2026-05",s:"internal",tags:["JBC","数据分析","知识库"],
  desc:"确立「Markdown 给 Agent 读、HTML 给人读」的分析工作流：Obsidian 沉淀文字图片资产，HTML 把需要理解的点可视化。",
  how:"Obsidian 维护 MD 知识库，需要展示时生成 HTML。",
  notes:[{t:"0518",id:"MjM3MzU0Njkx"}]},
-{c:"data",n:"IEYI 报名名单拆行 skill",d:"2026-04",s:"internal",
+{c:"data",n:"IEYI 报名名单拆行 skill",d:"2026-04",s:"internal",tags:["IEYI","自动化"],
  desc:"把 IEYI 报名表自动拆分为标准行数据的 skill。",
  how:"对 AI 说「请拆分这个 IEYI 报名表」即可。",
  notes:[{t:"0410",id:"MjMwODIzMDAw"}]},
+{c:"data",n:"竞对日报",d:"2026-03",s:"idea",tags:["信息雷达","调研"],
+ desc:"每日日报：抓取竞对公众号及相关信息（后并入信息雷达，用 anything-to-notebooklm 抓公众号）。",
+ how:"待重启：抓取与推送链路再评估。",
+ notes:[{t:"T141",id:"MjIzNTAxMTg5"}]},
 
 /* ---------- 护照与出行 ---------- */
-{c:"travel",n:"Passport MRZ Reader",d:"2026-04",s:"internal",
+{c:"travel",n:"Passport MRZ Reader",d:"2026-04",s:"internal",tags:["护照签证","工具库"],
  desc:"护照 MRZ 信息提取 + 有效期检查，27 分钟长程开发，已封装为可直接运行的安装包；核心卖点「本地运行不上云」。后续可扩展身份证、港澳通行证等证件，也可作为赋能合作方的服务工具。",
  how:"本机运行安装包，扫描/导入护照图片即提取信息。",
  notes:[{t:"0422",id:"MjMyODU2NjU3"}]},
-{c:"travel",n:"GCER 邀请函生成器",d:"2026-03→06",s:"internal",
+{c:"travel",n:"GCER 邀请函生成器",d:"2026-03→06",s:"internal",tags:["国际活动","护照签证","生成器"],
  desc:"从护照照片 / Excel 抓取姓名、生日、护照号，批量生成 GCER 邀请函；MRZ 识别与文字解析算法持续迭代中。",
  how:"本地运行：导入 Excel（或护照照片）→ 生成邀请函。",
  notes:[{t:"0315",id:"MjI2MTY2OTA4"},{t:"0603",id:"MjQwMDU5ODUx"},{t:"0326",id:"MjI4MTE0MjQ5"}]},
 
 /* ---------- 内部运营 ---------- */
-{c:"ops",n:"报销填报指引助手",d:"2026-09",s:"live",
+{c:"ops",n:"报销填报指引助手",d:"2026-09",s:"live",tags:["报销","自动化"],
  desc:"用自然语言描述报销事项（什么事+金额+有无发票+项目名），生成钉钉综合申请表的填报指引；含出差补助、选项总览、规则与待确认标注。只输出建议、不代替提交。",
  how:"输入报销描述 → 生成填报指引 → 复制文字版照着填；带「待确认」标记的项人工复核。",
  url:"https://baoxiao.itccc.app",shot:"baoxiao.jpg",
  notes:[{t:"0917",id:"MjU3MDEzOTE1"},{t:"0921",id:"MjU3NjM4OTI4"}]},
-{c:"ops",n:"ITCCC 合作 LOGO 墙",d:"2026-09",s:"live",
+{c:"ops",n:"ITCCC 合作 LOGO 墙",d:"2026-09",s:"live",tags:["素材库","品牌"],
  desc:"合作标识资产总览：60 项（活动与项目标识 / 国际主办方 / 国际合作伙伴 / 国内合作伙伴），按性质/项目切换、搜索、只看已有 LOGO。",
  how:"搜索机构名或按性质筛选 → 进入条目取用 LOGO。",
  url:"https://dfzgpuqg.qwenwork.host/",shot:"logo-wall.jpg",
  notes:[{t:"0914",id:"MjU2NjE0NDYy"}]},
-{c:"ops",n:"草料二维码 → PDF",d:"2026-04",s:"live",
+{c:"ops",n:"草料二维码 → PDF",d:"2026-04",s:"live",tags:["打印PDF","工具库"],
  desc:"输入草料二维码分享链接，一键解析并下载全部 PDF 文件；开发走 test（试方案）→ skill（封装）→ ship（GitHub+Vercel 发布）三段式。",
  how:"粘贴 qr61.cn 分享链接 → 点「解析并获取文件」。",
  url:"https://caoliao2pdf.itccc.app",shot:"caoliao2pdf.jpg",
  notes:[{t:"0417",id:"MjMyMDAzNDY0"}]},
-{c:"ops",n:"夜班自动机 · 会话周历页",d:"2026-10",s:"internal",
+{c:"ops",n:"夜班自动机 · 会话周历页",d:"2026-10",s:"internal",tags:["夜班","ZCode"],
  desc:"把一个月的 ZCode 工作 46 条会话填进甘特周历：周历/月视图/一览表三视图，按画面/完成/类型/组件四种配色，右侧会话详情。",
  how:"本地打开 nightshift/ 页面；有新工作往 ITEMS 数组加一行。",
  notes:[{t:"1004",id:"MjU5MzkwMzE1"}]},
-{c:"ops",n:"Flomo 尝试 · 百亿计划",d:"2026-09",s:"live",
+{c:"ops",n:"Flomo 尝试 · 百亿计划",d:"2026-09",s:"live",tags:["夜班","金数据","自动化"],
  desc:"夜班任务管理：GLM 遍历 2022 年以来所有 #尝试 笔记，按可行性与优先级排序自己排夜班；任务编号与金数据表格双向同步、持续维护。",
  how:"金数据表格视图管理（需登录）。",
  url:"https://next.jinshuju.net/tables/KIJcN3/views/S6amDw",
  notes:[{t:"0916",id:"MjU2ODA2Mjk3"}]},
-{c:"ops",n:"国际队伍支持 CRM",d:"2026-09",s:"live",
+{c:"ops",n:"国际队伍支持 CRM",d:"2026-09",s:"live",tags:["金数据","国际活动"],
  desc:"国际队伍支持 CRM：金数据表格管理已授权队伍与出证对象。",
  how:"金数据表格视图管理（需登录）。",
  url:"https://next.jinshuju.net/tables/KfGDNb/views/qYQmRd",
  notes:[{t:"0916",id:"MjU2ODA2MTUw"}]},
-{c:"ops",n:"机场延误双语海报",d:"2026-03",s:"internal",
+{c:"ops",n:"机场延误双语海报",d:"2026-03",s:"internal",tags:["活动组织","素材库"],
  desc:"机场延误标准化应对流程双语大海报，已成为标准应对机制并持续微创新。",
  how:"出行动态场景下按海报流程执行。",
  notes:[{t:"0328",id:"MjI4NDkwNzI0"}]},
-{c:"ops",n:"T054 跑步打点",d:"2026-09",s:"internal",
+{c:"ops",n:"T054 跑步打点",d:"2026-09",s:"internal",tags:["AI玩创营"],
  desc:"步频驱动鼓点的单文件网页（AI玩创营产出），待 iPhone 真机实测。",
  how:"本地打开 t054-running-beat/ 页面（真机需 HTTPS 隧道）。",
  notes:[{t:"0930",id:"MjU4ODgzODEz"}]},
-{c:"ops",n:"T041 失物招领系统",d:"2026-09",s:"internal",
+{c:"ops",n:"T041 失物招领系统",d:"2026-09",s:"internal",tags:["AI玩创营","金数据"],
  desc:"金数据登记表 + 对外查询页，含防冒领双描述口径（AI玩创营产出）。",
  how:"丢东西的人登记 → 拾到/查找者走查询页核对领取。",
  notes:[{t:"0930",id:"MjU4ODgxNDY1"}]},
-{c:"ops",n:"提词器（飞书 aiforce）",d:"2026-06",s:"internal",
+{c:"ops",n:"提词器（飞书 aiforce）",d:"2026-06",s:"internal",tags:["飞书","工具库"],
  desc:"飞书 aiforce 搭建的提词器应用，需豆包/飞书登录后访问。",
  how:"登录飞书/豆包后打开链接使用。",
  url:"https://f4u2us8y77.aiforce.cloud/app/app_4k9xsz1vp23sk",
  notes:[{t:"0603",id:"MjQwMDY0OTk0"}]},
-
-/* ---------- 想法池 ---------- */
-{c:"ops",n:"评语工作台（成长手册）",d:"2026-09",s:"idea",
+{c:"ops",n:"评语工作台（成长手册）",d:"2026-09",s:"idea",tags:["客户管理"],
  desc:"与其用金数据出老师手填的表单，不如做 skill / 工作台 / Coze 页面；顺带记录机构痛点：课后反馈语音转文字再优化，生成每位同学的个性化反馈图表。",
  how:"待启动：先定后台数据管理方案（本质是一整个客户管理平台）。",
  notes:[{t:"T006",id:"MjU1ODcwMzY0"}]},
-{c:"ops",n:"IEYI 评审助理志愿者考核",d:"2026-04",s:"idea",
+{c:"ops",n:"IEYI 评审助理志愿者考核",d:"2026-04",s:"idea",tags:["IEYI","表单"],
  desc:"面试考核系统两条路线：PlanA 金数据收集 + 豆包智能体对话；PlanB vibe 一个网页（听力 + 录音上传 + 钉钉数据表 + AI 评判出标签）。",
  how:"待启动：先小范围试 PlanA。",
  notes:[{t:"T116",id:"MjMwMTcwODkw"}]},
-{c:"web",n:"JBC Online 视频直传",d:"2026-03",s:"idea",
- desc:"替代「自建腾讯会议 + 提供录制链接」的复杂流程：用金数据 MCP 调手机录制、压缩到可控大小直接上传（迪拜 JBC 线上场要用）。",
- how:"待启动：验证金数据附件字段 + 录制压缩链路。",
- notes:[{t:"T127",id:"MjI3NjMzNTA1"}]},
-{c:"ops",n:"时间轴日程 → 表格日程",d:"2026-05",s:"idea",
+{c:"ops",n:"时间轴日程 → 表格日程",d:"2026-05",s:"idea",tags:["自动化"],
  desc:"根据时间轴日程表自动生成普通表格日程（夜班任务）。",
  how:"待启动。",
  notes:[{t:"T066",id:"MjM4MTQzNDQy"}]},
-{c:"ops",n:"Excel 变正式收据",d:"2026-04",s:"idea",
+{c:"ops",n:"Excel 变正式收据",d:"2026-04",s:"idea",tags:["自动化","报销"],
  desc:"把 Excel 数据批量转成正式收据。",
  how:"待启动。",
  notes:[{t:"0424",id:"MjMzMjc2MTM4"}]},
-{c:"ops",n:"钉钉 CRM",d:"2026-05",s:"idea",
+{c:"ops",n:"钉钉 CRM",d:"2026-05",s:"idea",tags:["客户管理","钉钉"],
  desc:"参考企业微信做法在钉钉搭 CRM：面聊转化为数据表记录，跟进结果自动回写。",
  how:"待启动。",
  notes:[{t:"0506",id:"MjM1MjY0OTUy"}]},
-{c:"web",n:"报名小程序登录态",d:"2026-05",s:"idea",
- desc:"小程序有登录态后，报名状态、通知、仲裁回复可不走邮箱而走微信。",
- how:"待启动：随报名小程序一起做。",
- notes:[{t:"0512",id:"MjM2MjYzMzY3"}]},
-{c:"web",n:"TEEMS 品牌 app",d:"2026-05",s:"idea",
- desc:"把内容汇集到一个品牌 app 下的构想（参考 husky-app）。",
- how:"待启动。",
- notes:[{t:"0511",id:"MjM2MTIwOTM0"}]},
-{c:"jbc",n:"TEEM 需求 → Stitch",d:"2026-03",s:"idea",
- desc:"把 TEEM 的开发需求扔到 Google Stitch 里试原型。",
- how:"待启动。",
- notes:[{t:"T129",id:"MjI3MTU2MjI2"}]},
-{c:"live",n:"RR 循线图形生成器",d:"2026-03",s:"idea",
- desc:"RoboRAVE 循线项目用的图形生成器构想。",
- how:"待启动。",
- notes:[{t:"T135",id:"MjI0ODcwNjYw"}]},
-{c:"ops",n:"小龙虾（智能体）用途清单",d:"2026-03",s:"idea",
+{c:"ops",n:"小龙虾（智能体）用途清单",d:"2026-03",s:"idea",tags:["自动化","智能体"],
  desc:"OpenClaw/智能体能接的工作总清单：官网监控、友商公众号日报、报名数据、Bebras 题库分析、JBC 金奖进度播报、wiki 答疑、道具分装表、日程看板等。",
  how:"逐项孵化为独立自动化。",
  notes:[{t:"T136",id:"MjI0ODYxMjk4"}]},
-{c:"live",n:"视觉识别判分（技术储备）",d:"2026-03",s:"idea",
- desc:"多模态模型够强够快时可给 JBC Online 判分；等模型能接收 200M 视频输入、online 规模到位再启用。",
- how:"技术储备，暂不投入。",
- notes:[{t:"T139",id:"MjI0MjgzNjkz"}]},
-{c:"ops",n:"官网自动扫描",d:"2026-03",s:"live",
+{c:"ops",n:"官网自动扫描",d:"2026-03",s:"live",tags:["自动化","信息雷达"],
  desc:"每天扫描 RR 官网和 Botball team homebase，解决信息同步不及时的问题（已跑通）。",
  how:"自动化定时任务，产出同步提醒。",
  notes:[{t:"T140",id:"MjI0MTY2NTE5"}]},
-{c:"data",n:"竞对日报",d:"2026-03",s:"idea",
- desc:"每日日报：抓取竞对公众号及相关信息（后并入信息雷达，用 anything-to-notebooklm 抓公众号）。",
- how:"待重启：抓取与推送链路再评估。",
- notes:[{t:"T141",id:"MjIzNTAxMTg5"}]},
-{c:"live",n:"现场三件套清单",d:"2026-04",s:"idea",
- desc:"JBC 现场工具三件套：队伍编号系统、裁判和队伍安排表、学术布场图。",
- how:"布场图已上线，编号系统与安排表待做。",
- notes:[{t:"T111",id:"MjMwOTA1OTQ0"}]},
-{c:"web",n:"2026 IEYI newsletter",d:"2026-03",s:"idea",
- desc:"2026 IEYI 新闻通讯（占位记录）。",
- how:"待启动。",
- notes:[{t:"0304",id:"MjI0MTY2NTg4"}]},
 ];
 
-/* ================= 渲染逻辑 ================= */
+/* ================= 筛选状态与渲染 ================= */
 const BADGE = {live:["b-live","已上线"],internal:["b-internal","内部 / 本地"],idea:["b-idea","想法"],paused:["b-paused","挂起"]};
 const flomo = id => `https://v.flomoapp.com/mine/?memo_id=${id}`;
-let curCat = "all", curQ = "";
+const host = u => { try { return new URL(u).host; } catch(e){ return ""; } };
+let curCat="all", curStatus="all", curTag=null, curQ="";
 
+/* 侧边栏 */
+function renderSide(){
+  const catCnt = {}, stCnt = {}, tagCnt = {};
+  for(const t of TOOLS){
+    catCnt[t.c]=(catCnt[t.c]||0)+1;
+    stCnt[t.s]=(stCnt[t.s]||0)+1;
+    for(const g of (t.tags||[])) tagCnt[g]=(tagCnt[g]||0)+1;
+  }
+  const stCntAll = TOOLS.length;
+  const tags = Object.entries(tagCnt).filter(([,n])=>n>=2).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],"zh"));
+  document.getElementById("side").innerHTML = `
+  <div class="group"><h4>分类 · CATEGORIES</h4>
+    <button class="fitem ${curCat==="all"?"on":""}" data-k="cat" data-v="all">✦ 全部<span class="cnt">${TOOLS.length}</span></button>
+    ${CATS.map(c=>`<button class="fitem ${curCat===c.id?"on":""}" data-k="cat" data-v="${c.id}">${c.icon} ${c.name}<span class="cnt">${catCnt[c.id]||0}</span></button>`).join("")}
+  </div>
+  <div class="group"><h4>状态 · STATUS</h4>
+    ${STATUSES.map(s=>`<button class="fitem ${curStatus===s.id?"on":""}" data-k="status" data-v="${s.id}">${s.name}<span class="cnt">${s.id==="all"?stCntAll:(stCnt[s.id]||0)}</span></button>`).join("")}
+  </div>
+  <div class="group"><h4>标签 · TAGS</h4>
+    <div class="tagpool">${tags.map(([g,n])=>`<button class="tagbtn ${curTag===g?"on":""}" data-k="tag" data-v="${g}">${g} ${n}</button>`).join("")}</div>
+  </div>`;
+}
+document.getElementById("side").addEventListener("click",e=>{
+  const b = e.target.closest("[data-k]"); if(!b) return;
+  const {k,v} = b.dataset;
+  if(k==="cat") curCat=v;
+  else if(k==="status") curStatus=v;
+  else if(k==="tag") curTag = (curTag===v?null:v);
+  render();
+});
+
+/* 卡片 */
 function card(t){
   const [bc,bt] = BADGE[t.s]||BADGE.internal;
   const shot = t.shot
     ? `<div class="shot"><img loading="lazy" src="screenshots/${t.shot}" alt="${t.n} 界面截图" onerror="this.parentNode.innerHTML='<div class=\\'ph\\'><em>🧰</em><span>暂无截图</span></div>'"></div>`
     : `<div class="shot"><div class="ph"><em>${t.s==="idea"?"💡":"🧰"}</em><span>${t.s==="idea"?"想法 · 暂无界面":"内部工具 · 暂无公开界面"}</span></div></div>`;
-  const links = (t.url?`<a class="btn primary" href="${t.url}" target="_blank" rel="noopener">打开工具 ↗</a>`:"")
-    + (t.notes||[]).map(x=>`<a class="btn" href="${flomo(x.id)}" target="_blank" rel="noopener">笔记 · ${x.t} ↗</a>`).join("")
-    + (!t.url && !(t.notes||[]).length ? `<span class="nolink">无链接</span>`:"");
+  const notes = (t.notes||[]).map(x=>`<a class="notebtn" href="${flomo(x.id)}" target="_blank" rel="noopener">✎ ${x.t}</a>`).join(" · ");
+  const foot = t.url
+    ? `<a class="siteurl" href="${t.url}" target="_blank" rel="noopener" title="${t.url}">${host(t.url)} ↗</a>`
+    : `<span class="nosite">${t.s==="idea"?"想法 · 未上线":"内部工具"}</span>`;
   return `<article class="card" data-c="${t.c}">
     ${shot}
     <div class="body">
       <div class="titlerow"><h3>${t.n}</h3><span class="badge ${bc}">${bt}</span><span class="date">${t.d}</span></div>
       <p class="desc">${t.desc}</p>
       <p class="how"><b>怎么用</b>${t.how}</p>
-      <div class="links">${links}</div>
+      <div class="tagrow">${(t.tags||[]).map(g=>`<button class="t ${curTag===g?"on":""}" data-k="tag" data-v="${g}">${g}</button>`).join("")}</div>
     </div>
+    <div class="cardfoot"><span class="notewrap">${notes||'<span class="nosite">无笔记</span>'}</span>${foot}</div>
   </article>`;
 }
 
 function render(){
-  const main = document.getElementById("main");
-  let html = "", shown = 0;
+  renderSide();
+  const filtered = TOOLS.filter(t=>
+    (curCat==="all"||t.c===curCat) &&
+    (curStatus==="all"||t.s===curStatus) &&
+    (!curTag || (t.tags||[]).includes(curTag)) &&
+    (!curQ || (t.n+t.desc+t.how+(t.tags||[]).join()).toLowerCase().includes(curQ)));
+  let html="", shown=0;
   for(const cat of CATS){
-    const items = TOOLS.filter(t=>t.c===cat.id
-      && (curCat==="all"||curCat===cat.id)
-      && (!curQ || (t.n+t.desc+t.how).toLowerCase().includes(curQ)));
+    const items = filtered.filter(t=>t.c===cat.id);
     if(!items.length) continue;
     shown += items.length;
-    const liveN = items.filter(t=>t.s==="live").length;
-    html += `<section id="sec-${cat.id}"><h2>${cat.name}<small>${items.length} 项 · ${liveN} 个已上线</small></h2>
+    html += `<section><h2>${cat.icon} ${cat.name}<small>${items.length} 项</small></h2>
       <div class="grid">${items.map(card).join("")}</div></section>`;
   }
-  main.innerHTML = html;
+  document.getElementById("main").innerHTML = html;
   document.getElementById("empty").style.display = shown?"none":"block";
   document.getElementById("stats").innerHTML =
-    `<div><b>${TOOLS.length}</b><span>条目总数</span></div>
+    `<div><b>${TOOLS.length}</b><span>条目</span></div>
      <div><b>${TOOLS.filter(t=>t.s==="live").length}</b><span>已上线</span></div>
-     <div><b>${TOOLS.filter(t=>t.shot).length}</b><span>含界面截图</span></div>
-     <div><b>${TOOLS.filter(t=>t.s==="idea").length}</b><span>想法池</span></div>`;
+     <div><b>${TOOLS.filter(t=>t.shot).length}</b><span>含截图</span></div>
+     <div><b>${new Set(TOOLS.flatMap(t=>t.tags||[])).size}</b><span>个标签</span></div>`;
 }
-
-const chips = document.getElementById("chips");
-chips.innerHTML = `<button class="chip on" data-c="all">全部</button>` +
-  CATS.map(c=>`<button class="chip" data-c="${c.id}">${c.name}</button>`).join("");
-chips.addEventListener("click",e=>{
-  const b = e.target.closest(".chip"); if(!b) return;
-  chips.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x===b));
-  curCat = b.dataset.c; render();
-});
 document.getElementById("q").addEventListener("input",e=>{curQ=e.target.value.trim().toLowerCase();render();});
 render();
 </script>
