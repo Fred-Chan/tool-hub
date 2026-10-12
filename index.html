@@ -41,6 +41,10 @@ aside .group:last-child{margin-bottom:0}
 .fitem.on{background:var(--ink);color:#fff}
 .fitem .cnt{margin-left:auto;font-size:11.5px;color:inherit;opacity:.55}
 .fitem.on .cnt{opacity:.8}
+.ck{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;font-size:13.5px;cursor:pointer;user-select:none}
+.ck:hover{background:#e7e4dc}
+.ck input{accent-color:var(--accent);width:15px;height:15px;margin:0;flex:none;cursor:pointer}
+.ck .cnt{margin-left:auto;font-size:11.5px;color:var(--ink2)}
 .tagpool{display:flex;flex-wrap:wrap;gap:6px}
 .tagbtn{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:2.5px 10px;
   font-size:11.5px;cursor:pointer;color:var(--ink2);font-family:inherit;transition:.12s}
@@ -146,7 +150,6 @@ const CATS = [
   {id:"ops",   icon:"🧰", name:"内部运营"},
 ];
 const STATUSES = [
-  {id:"all",      name:"全部"},
   {id:"live",     name:"已上线"},
   {id:"internal", name:"内部 / 本地"},
   {id:"idea",     name:"想法池"},
@@ -565,7 +568,8 @@ const TOOLS = [
 const BADGE = {live:["b-live","已上线"],internal:["b-internal","内部 / 本地"],idea:["b-idea","想法"],paused:["b-paused","挂起"]};
 const flomo = id => `https://v.flomoapp.com/mine/?memo_id=${id}`;
 const host = u => { try { return new URL(u).host; } catch(e){ return ""; } };
-let curCat="all", curStatus="all", curTag=null, curQ="";
+let curCat="all", curTag=null, curQ="";
+const statusOn = {live:true, internal:false, idea:false, paused:false}; /* 复选框：默认只显示已上线 */
 
 /* 侧边栏 */
 function renderSide(){
@@ -582,7 +586,7 @@ function renderSide(){
     ${CATS.map(c=>`<button class="fitem ${curCat===c.id?"on":""}" data-k="cat" data-v="${c.id}">${c.icon} ${c.name}<span class="cnt">${catCnt[c.id]||0}</span></button>`).join("")}
   </div>
   <div class="group"><h4>状态 · STATUS</h4>
-    ${STATUSES.map(s=>`<button class="fitem ${curStatus===s.id?"on":""}" data-k="status" data-v="${s.id}">${s.name}<span class="cnt">${s.id==="all"?TOOLS.length:(stCnt[s.id]||0)}</span></button>`).join("")}
+    ${STATUSES.filter(s=>s.id==="live"||(stCnt[s.id]||0)>0).map(s=>`<label class="ck"><input type="checkbox" data-st="${s.id}" ${statusOn[s.id]?"checked":""}> ${s.name}<span class="cnt">${stCnt[s.id]||0}</span></label>`).join("")}
   </div>
   <div class="group"><h4>标签 · TAGS</h4>
     <div class="tagpool">${tags.map(([g,n])=>`<button class="tagbtn ${curTag===g?"on":""}" data-k="tag" data-v="${g}">${g} ${n}</button>`).join("")}</div>
@@ -592,8 +596,12 @@ document.getElementById("side").addEventListener("click",e=>{
   const b = e.target.closest("[data-k]"); if(!b) return;
   const {k,v} = b.dataset;
   if(k==="cat") curCat=v;
-  else if(k==="status") curStatus=v;
   else if(k==="tag") curTag = (curTag===v?null:v);
+  render();
+});
+document.getElementById("side").addEventListener("change",e=>{
+  const cb = e.target.closest("input[data-st]"); if(!cb) return;
+  statusOn[cb.dataset.st] = cb.checked;
   render();
 });
 
@@ -624,8 +632,8 @@ function card(t){
 function render(){
   renderSide();
   const filtered = TOOLS.filter(t=>
+    statusOn[t.s] &&
     (curCat==="all"||t.c===curCat) &&
-    (curStatus==="all"||t.s===curStatus) &&
     (!curTag || (t.tags||[]).includes(curTag)) &&
     (!curQ || (t.n+t.desc+t.how+(t.tags||[]).join()+(t.list||[]).join()).toLowerCase().includes(curQ)));
   let html="", shown=0;
