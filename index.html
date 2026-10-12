@@ -70,9 +70,12 @@ section h2 small{font-size:12px;color:var(--ink2);font-weight:400}
 .b-idea{background:#f6efd8;color:var(--gold)}
 .b-paused{background:#f7e4e2;color:var(--red)}
 .desc{color:#3d3a34;font-size:13px;margin:7px 0 0}
-.how{font-size:12px;color:var(--ink2);margin:7px 0 0;padding-left:9px;border-left:3px solid var(--line)}
+.plist{margin:8px 0 0;padding:0;list-style:none}
+.plist li{font-size:12px;color:var(--ink2);padding-left:13px;position:relative;margin:3px 0}
+.plist li::before{content:"●";position:absolute;left:0;top:1px;font-size:8px;color:var(--accent)}
+.how{font-size:12px;color:var(--ink2);margin:9px 0 0;padding-left:9px;border-left:3px solid var(--line)}
 .how b{color:var(--accent2);font-weight:700;margin-right:4px}
-.tagrow{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 12px}
+.tagrow{display:flex;flex-wrap:wrap;gap:6px;margin:11px 0 12px}
 .tagrow .t{border:1px solid var(--line);background:#faf9f6;border-radius:999px;padding:1.5px 9px;
   font-size:11px;color:var(--ink2);cursor:pointer;font-family:inherit}
 .tagrow .t:hover{border-color:var(--accent);color:var(--accent)}
@@ -92,7 +95,6 @@ footer a{color:var(--accent)}
   .layout{flex-direction:column;gap:18px}
   aside{position:static;width:100%;max-height:none}
   aside .group{margin-bottom:14px}
-  .tagpool{max-height:none}
 }
 </style>
 </head>
@@ -119,8 +121,8 @@ footer a{color:var(--accent)}
 
 <footer>
   <div class="wrap">
-    <p><b>如何新增条目</b>：在 <code>index.html</code> 的 <code>TOOLS</code> 数组末尾加一行（名称 / 分类 / 状态 / 标签 / 描述 / 用法 / 链接 / 截图 / 笔记 id），提交到 GitHub 后 Vercel 自动重新部署。截图放 <code>screenshots/</code>（1280×800 JPG）。</p>
-    <p>仓库：<a href="https://github.com/Fred-Chan/tool-hub">github.com/Fred-Chan/tool-hub</a> · 更新于 2026-10-12 · 由 ZCode 从 flomo #vibecoding 笔记汇总</p>
+    <p><b>如何新增条目</b>：在 <code>index.html</code> 的 <code>TOOLS</code> 数组末尾加一行（名称 / 分类 / 状态 / 标签 / 描述 / 要点 / 用法 / 链接 / 截图 / 笔记 id），提交到 GitHub 后 Vercel 自动重新部署。截图放 <code>screenshots/</code>（1280×800 JPG）。</p>
+    <p>仓库：<a href="https://github.com/Fred-Chan/tool-hub">github.com/Fred-Chan/tool-hub</a> · 更新于 2026-10-12 · 收录 2025-11 以来的工作相关 #vibecoding 产出</p>
   </div>
 </footer>
 
@@ -128,13 +130,14 @@ footer a{color:var(--accent)}
 /* ============================================================
    TOOLS 字段（加行即可新增）：
    c:分类id  n:名称  d:时间  s:状态 live/internal/idea/paused
-   tags:[标签…]  desc:描述  how:怎么用
+   tags:[标签…]  desc:描述段落  list:[要点/场景…]  how:怎么用
    url:线上地址(可省)  shot:截图文件名(可省)
    notes:[{t:"标签",id:"flomo memo id"}]
 ============================================================ */
 const CATS = [
   {id:"jbc",   icon:"🧩", name:"命题与质检"},
   {id:"live",  icon:"🏟️", name:"成绩与现场"},
+  {id:"edu",   icon:"🎓", name:"教学与题库"},
   {id:"cert",  icon:"🏅", name:"证书与查询"},
   {id:"web",   icon:"🌐", name:"对外网站"},
   {id:"props", icon:"🎽", name:"道具与周边"},
@@ -151,7 +154,7 @@ const STATUSES = [
 ];
 
 const TOOLS = [
-/* ---------- 命题与质检 ---------- */
+/* ================= 命题与质检 ================= */
 {c:"jbc",n:"JBC 任务审查器",d:"2026-08/09",s:"live",tags:["JBC","命题出题","PPT工具"],
  desc:"拖入命题 PPTX，按 T119 八条清单自动检查：标记一致、启动标注、单次/多次话术、标点、道具图文相符、各级别题量、任务顺序、入门级子任务，审查后出报告、即弃不存文件。",
  how:"把任务 PPTX（≤4MB，《JBC任务设计模板》版式最佳）拖入上传框 → 自动检查并输出报告；大文件与完整功能用本机版 review_web/server.py。",
@@ -165,6 +168,10 @@ const TOOLS = [
  desc:"2027 年度开放挑战（O 套题）的任务生成流水线：先出 Markdown 再出 PPT，含探索 B 任务生成器与逐份核对。",
  how:"本地流水线运行；各套产物按 output/2027/O<套> 归档。",
  notes:[{t:"0913",id:"MjU2MzU2OTg4"}]},
+{c:"jbc",n:"探索 B 题目生成器 · 杯子编辑器",d:"2025-11",s:"internal",tags:["JBC","命题出题","生成器"],
+ desc:"LEGO 3D 编辑器改造成的 JBC 探索 B「夹杯子」题目生成器（AI Studio app），可视化摆放道具出题，是探索 B 命题工具化（后演进为 T018 命题工具与 2027 O 套题流水线）的起点。",
+ how:"AI Studio 内打开使用。",
+ notes:[{t:"T454",id:"MjA2MTI2NTc5"},{t:"1119",id:"MjA2MTQ1MzEw"}]},
 {c:"jbc",n:"「今天练什么」题库生成器",d:"2026-10",s:"internal",tags:["JBC","命题出题","夜班"],
  desc:"夜班项目：输入变量按规则从题库出题，回答「JBC 今天练什么」。",
  how:"夜班批处理运行，输入变量产出训练题。",
@@ -174,7 +181,25 @@ const TOOLS = [
  how:"待启动。",
  notes:[{t:"T129",id:"MjI3MTU2MjI2"}]},
 
-/* ---------- 成绩与现场 ---------- */
+/* ================= 成绩与现场 ================= */
+{c:"live",n:"JBC 场间播报计时工具",d:"2026-02",s:"live",tags:["JBC","现场","生成器"],
+ desc:"学术模块学术负责人现场要根据任务正式发布的时间，在距离还剩 1 小时、半小时、15 分钟和 5 分钟的时候，分别播报提醒。本工具可以快速地完成这些时间点的设置，并生成对应的文案，学术负责人可以根据这些时间点去设置闹钟，到点后及时提醒。",
+ list:["支持中文和英文","开放挑战和亚洲分会不同的时长","开启倒计时，可以在大屏幕上面显示还剩下多少时间，并配置背景图"],
+ how:"选语言和挑战级别 → 填开始时间 → 生成播报文案 / 开启大屏倒计时。",
+ url:"https://jbc-timer.itccc.app",shot:"jbc-timer.jpg",
+ notes:[{t:"0205",id:"MjE5ODA0ODQ5"}]},
+{c:"live",n:"JBC 题目拆分打印工具",d:"2026-03",s:"live",tags:["JBC","打印PDF","命题出题"],
+ desc:"一个用于自动化处理分级课件的拼版导出工具：输入 1 个包含所有级别内容的 PDF 文件，工具会按级别自动拆分内容，并按照每 4 页 PPT 拼成 1 页的规则进行排版，最终分别导出对应的 PDF 文件。",
+ list:["启蒙级 A/B/C、探索级 A/B、新秀级、进阶级、高手级各输出 1 个 PDF","入门级 A 和入门级 B 因各有 8 页、PRE 有 6 页，处理后分别输出 2 个 PDF"],
+ how:"PowerPoint 先把任务导出为 PDF → 上传 → 自动拆分拼版 → 下载各级别 PDF。",
+ url:"https://renwudayin.itccc.app",shot:"renwudayin.jpg",
+ notes:[{t:"0324",id:"MjI3ODEwNDM0"}]},
+{c:"live",n:"JBC 学术布场图工具",d:"2026-08",s:"live",tags:["JBC","现场","生成器"],
+ desc:"生成学术布场图分四步：1. 先用 Shapr 规划各分区级别、队伍及裁判单元行列数；2. 按分区规划顺序排裁判安排表；3. 导入裁判安排表、分区顺序和行列；4. 预览布场图。",
+ list:["13 日与 14 日是两个场次：启蒙、探索、入门等队伍编号不同，请用顶部的场次切换分别布场","每个格子点击「+ 添加分区」放入一个或多个分区；同一格子的分区在场地中上下相邻堆叠","分区标签可直接拖拽到其他格子移动（拖入已有分区的格子则上下堆叠），比删除再添加更方便","点彩色标签可配置该分区的每行站数、标题底色与空置位（按天独立）；「复制到另一天」可整场复制后微调","十字站位：中间为裁判号，左右各 2 支队伍，按 上左→下左→上右→下右 对应裁判的队伍 1–4","分区内裁判按列优先排布：最左一列自上而下连续编号再进入下一列，同列号码连续方便设列指引牌；14 日未填数据的分区视为沿用 13 日布置，两天不变的整组只生成一个共享 sheet"],
+ how:"上传裁判安排 Excel（含「裁判安排」工作表）→ 可视化配置分区与行列 → 预览导出布场 Excel。",
+ url:"https://bbxueshubuchangtu.itccc.app",shot:"bbxueshu.jpg",
+ notes:[{t:"0821",id:"MjUyOTExOTk2"}]},
 {c:"live",n:"Botball 成绩查询",d:"2026-04",s:"live",tags:["Botball","成绩统计","查询入口"],
  desc:"亚洲分会成绩查询页：按场次与级别筛选，输入队伍编号显示单队成绩；入门级显示得分，其他级别显示完成/未完成。",
  how:"输入队伍编号 → 选场次和级别 → 查询；编号支持简写。",
@@ -185,11 +210,27 @@ const TOOLS = [
  how:"现场逐块填写 → 右下角「提交到钉钉数据表」；需要留档点「打印/导出PDF」。",
  url:"https://kanchang.itccc.app",shot:"kanchang.jpg",
  notes:[{t:"0614",id:"MjQxODk3NDMz"}]},
-{c:"live",n:"学术布场图生成器",d:"2026-08",s:"live",tags:["现场","生成器","JBC"],
- desc:"上传含「裁判安排」工作表的 Excel，可视化配置场地区分，一键生成带位置表的学术布场 Excel。",
- how:"第一步上传 .xlsx → 第二步可视化配置场地区分并生成。",
- url:"https://bbxueshubuchangtu.itccc.app",shot:"bbxueshu.jpg",
- notes:[{t:"0821",id:"MjUyOTExOTk2"}]},
+{c:"live",n:"Botball 器材检查器",d:"2026-02",s:"live",tags:["Botball","现场","工具库"],
+ desc:"方便队伍知道自己用了多少零件、有没有超规：按电子套件 / 金属零件 / 乐高零件三大类限额计数，输入队伍编号即可统计两台机器人各自的已用与剩余、并标出超规项。",
+ how:"输入队伍编号 → 按零件逐项 +/- 记数 → 打印或查看清单 PDF；支持导入/导出数据。",
+ url:"https://botball-check.itccc.app/",shot:"botball-check.jpg",
+ notes:[{t:"T441",id:"MjIxMjA3Njc2"}]},
+{c:"live",n:"Botball 电子计分单",d:"2026-01",s:"live",tags:["Botball","成绩统计","现场"],
+ desc:"为方便队伍练习做的电子记分工具：覆盖 2026 赛季积分挑战与巅峰对决两种模式。",
+ list:["可以生成道具随机位置","ADDS 计时器，队员可以根据计时器的节奏来手动控制","分数记录支持两侧场地分别记分","在总分显示点击任何一个分项，可以跳转到对应的原始记分","可以快速查看挑战规则","图片导出，输入队号、队名、场地编号、时间戳"],
+ how:"选比赛模式 → 随机生成道具 → 开始记分；规则图示可展开速查。",
+ url:"https://2026-botball-score.itccc.app/",shot:"botball-score.jpg",
+ notes:[{t:"0115",id:"MjE2MzE5MTA1"}]},
+{c:"live",n:"RoboRAVE 计分单导航",d:"2026-01",s:"live",tags:["RoboRAVE","成绩统计"],
+ desc:"RoboRAVE 六大挑战计分单统一入口，中英双语：投掷挑战、童心趣搭、极速挑战、精英定位、冰壶挑战、迷宫挑战。",
+ how:"打开导航页 → 点选挑战进入对应计分单。",
+ url:"https://rr-score.itccc.app/",shot:"rr-score.jpg",
+ notes:[{t:"0118",id:"MjE2ODIwNTEw"}]},
+{c:"live",n:"JBC 飞行挑战计分单",d:"2025-12",s:"live",tags:["JBC","成绩统计"],
+ desc:"飞行挑战 A 计分单：七个任务逐项计分（环绕/定点降落/穿越等），支持保存、历史、导出与排名统计。",
+ how:"输入队号、第几次、场地编号 → 逐项 +/- 记分 → 保存并导出。",
+ url:"https://feixing.itccc.app/",shot:"feixing.jpg",
+ notes:[{t:"T446",id:"MjEyNjQ4MjQ0"}]},
 {c:"live",n:"JBC 亚洲分会实时成绩系统",d:"2026-03→06",s:"internal",tags:["JBC","成绩统计","钉钉"],
  desc:"裁判用钉钉录入、组委会多维表管理、领队独立域名查询端 + 仪表盘；赛后产出逐题难度分析用于调整下一场难度。收集→处理→仪表盘→管理端全链路可复用。",
  how:"内部系统：裁判在钉钉内打开录入表（避免微信拦截）；查询端用固定域名访问。",
@@ -198,14 +239,26 @@ const TOOLS = [
  desc:"Botball 中学组计分与成绩发布：飞书多维表作后台存储，含比赛模式（密码进入），Vercel 部署。",
  how:"内部使用；比赛模式下录入与发布成绩。",
  notes:[{t:"0416",id:"MjMxNzg5Nzg2"}]},
+{c:"live",n:"RoboRAVE 成统系统",d:"2025-12",s:"internal",tags:["RoboRAVE","成绩统计"],
+ desc:"手搓的 RR 成绩统计项目（rr_score_system），ITCCC 成绩统计系统的起点，后续演化为电子计分单与 bbchengji 查询页。",
+ how:"内部使用。",
+ notes:[{t:"T447",id:"MjEyNjQ4MTgw"}]},
 {c:"live",n:"实时投票 / 图表",d:"2026-08",s:"internal",tags:["金数据","成绩统计","自动化"],
  desc:"金数据手机号验证鉴权收集 + 外部页面定时抓取金数据做实时图表，已测试跑通；成绩统计等输入受控场景需另行设计。",
  how:"金数据表单收集 → 外部图表页定时刷新展示。",
  notes:[{t:"0806",id:"MjUwNDQwMzYy"}]},
 {c:"live",n:"ADDS 随机模块",d:"2026-05",s:"internal",tags:["现场","成绩统计"],
- desc:"给计分页面增加 ADDS 随机模块：一行 8 个圆形标记（4 粉 4 蓝），按按钮随机排列。",
- how:"集成在对应计分页面中，点按钮随机。",
+ desc:"给计分页面增加 ADDS 随机模块：一行 8 个圆形标记（4 粉 4 蓝），按按钮随机排列（已集成进电子计分单）。",
+ how:"集成在计分页面中，点按钮随机。",
  notes:[{t:"0517",id:"MjM3MTA5MTk5"}]},
+{c:"live",n:"检录清单电子版",d:"2026-02",s:"idea",tags:["现场","表单"],
+ desc:"RoboRAVE 和 IEYI 的检录清单、布场检录清单做成好用的电子版及打印版，方便现场不同的人进行检录；也可放钉钉实时同步状态（现场可能还是一张纸更顺手）。",
+ how:"待启动。",
+ notes:[{t:"0214",id:"MjIxMjA3Nzk5"}]},
+{c:"live",n:"比赛系统小程序",d:"2026-02",s:"idea",tags:["微信小程序","现场"],
+ desc:"把比赛系统做成小程序：二维码扫描入场，同时也能放规则，解决语雀不能跳转、不能插入视频的问题。",
+ how:"待启动。",
+ notes:[{t:"T144",id:"MjIzNDA4NjA2"}]},
 {c:"live",n:"RR 循线图形生成器",d:"2026-03",s:"idea",tags:["RoboRAVE","生成器"],
  desc:"RoboRAVE 循线项目用的图形生成器构想。",
  how:"待启动。",
@@ -219,7 +272,36 @@ const TOOLS = [
  how:"布场图已上线，编号系统与安排表待做。",
  notes:[{t:"T111",id:"MjMwOTA1OTQ0"}]},
 
-/* ---------- 证书与查询 ---------- */
+/* ================= 教学与题库 ================= */
+{c:"edu",n:"计算思维小游戏合集",d:"2025-12→2026-01",s:"live",tags:["Bebras","小游戏","官网页"],
+ desc:"计算思维系列网页小游戏导航（ct.itccc.app），通过互动游戏探索计算机科学的核心概念，寓教于乐。",
+ list:["二进制加密解密游戏 binary-converter-game.itccc.app","寻路小达人·A* 算法演示 astar.itccc.app（可做成动态追逐游戏）","二进制定时器 erjinzhi.itccc.app：用 1/2/4/8 四个灯理解二进制计数与定时出题","猪圈密码演示 zhujuanmima.itccc.app","弗吉尼亚密码演示 fujiniyamima.itccc.app"],
+ how:"打开导航页 → 选游戏点「开始游戏」。",
+ url:"https://ct.itccc.app/",shot:"ct-games.jpg",
+ notes:[{t:"合集",id:"MjE0NzAxMTI4"},{t:"定时器",id:"MjEzMDk0NTM5"},{t:"密码",id:"MjEyNjQ4MzE2"}]},
+{c:"edu",n:"Bebras 计算思维选题报告",d:"2026-04",s:"live",tags:["Bebras","命题出题","Coze"],
+ desc:"计算思维题目精选报告（小学 4-6 年级）：按难度分级、题目图片全嵌入，附统计卡片与快速索引，支持打印；配套众包校错机制（除虫换积分/证书/进学术委员会）。",
+ how:"打开链接浏览题目与索引 → 需要纸质时直接打印。",
+ url:"https://www.coze.cn/s/aFowjgxyvLo/",shot:"ct-tasks.jpg",
+ notes:[{t:"0415",id:"MjMxNjM0NDk0"},{t:"0413",id:"MjMxMjM0NDM5"}]},
+{c:"edu",n:"计算思维题库知识库",d:"2026-04",s:"internal",tags:["Bebras","知识库"],
+ desc:"Coze + 本地 Claude Code 三层架构（原始素材 / AI 整理知识 / 规则文件），操作只有录入、查询、修复；能出知识点 wiki、分析报告，还能组卷。",
+ how:"Coze 云电脑（Paseo / Claude Code）内按三层结构维护。",
+ notes:[{t:"T426",id:"MjMxMjM0NDM5"},{t:"T427",id:"MjMxMDQ1NDI5"}]},
+{c:"edu",n:"计算思维出题 Agent 工作流",d:"2026-01",s:"idea",tags:["Bebras","命题出题"],
+ desc:"出题流水线构想：以某个主题的优秀题目为数据源（用 ima、notebooklm 或钉钉题库汇集）→ Claude Code 读取文件、保留格式生成 → Youmind agent 模式写作 → lovart 生成配图 → 学术团队做验证和修改的飞轮。",
+ how:"待建：先跑通单主题试点。",
+ notes:[{t:"0113",id:"MjE1ODg3NTY2"}]},
+{c:"edu",n:"Bebras 每日一题",d:"2026-01",s:"idea",tags:["Bebras","命题出题"],
+ desc:"从选出来的题库里循环出每日一题；分析哪些知识点题目不足，用 skills 生成新题；配套课例库与审核 skill。",
+ how:"待启动。",
+ notes:[{t:"0124",id:"MjE3NzQ0NDcw"}]},
+{c:"edu",n:"算术对抗游戏 · 拔河",d:"2026-02",s:"idea",tags:["小游戏"],
+ desc:"算术对抗游戏「拔河」构想：算术练习 + 对抗机制。",
+ how:"待启动。",
+ notes:[{t:"0212",id:"MjIxMDM3OTk2"}]},
+
+/* ================= 证书与查询 ================= */
 {c:"cert",n:"证书表单索引 · 跨年查询",d:"2026-08",s:"live",tags:["金数据","证书","查询入口","Coze"],
  desc:"金数据账号下全部证书相关表单索引（279 个：JBC 核心 / GCER / RoboRAVE 等分类），支撑跨年检索学员获证记录；曾一次遍历 5066 个表单完成证书追踪，token 只花 2.8 元。",
  how:"打开链接 → 按分类筛选或搜索表单名 → 点「打开表单」进入对应年度查询系统。",
@@ -230,7 +312,7 @@ const TOOLS = [
  how:"微信内打开小程序按入口查询。",
  notes:[{t:"0615",id:"MjQyMDU5MjI5"}]},
 
-/* ---------- 对外网站 ---------- */
+/* ================= 对外网站 ================= */
 {c:"web",n:"ICMC 规则站",d:"2026-09",s:"live",tags:["ICMC","官网页"],
  desc:"第三届至第二十届 ICMC 任务规则整理：任务背景、场地器材、比赛过程与计分，主题与奖牌样式另附；可按组别筛选，给低龄任务设计做参考。",
  how:"顶部按届次跳转，或「按组别筛选」只看 JR/机械/动力/感控/智能/编程。",
@@ -241,6 +323,21 @@ const TOOLS = [
  how:"直接浏览 Guides / Cities 两个入口。",
  url:"https://visitchina.itccc.app",shot:"visitchina.jpg",
  notes:[{t:"0911",id:"MjU2MjA5OTM4"}]},
+{c:"web",n:"IEYI 国际网站",d:"2025-12",s:"live",tags:["IEYI","官网页","国际活动"],
+ desc:"IEYI 国际版官网（2026 · 北京水立方）：About / Categories / Awards / Schedule 与获奖查询入口，面向国际队伍与评委。",
+ how:"直接浏览；Award Results 查看获奖结果。",
+ url:"https://ieyi.itccc.app",shot:"ieyi-site.jpg",
+ notes:[{t:"1230",id:"MjEzMTk4MTY5"}]},
+{c:"web",n:"RoboRAVE 国际宣传站",d:"2025-12",s:"live",tags:["RoboRAVE","官网页","国际活动"],
+ desc:"国际队伍专用的静态宣传站（jbc.itccc.app 同一套打法）：基于通知内容生成，部署 GitHub + Vercel、绑定跳转域名；服务器与域名托管在国外、免备案，跟主站分离。国际队伍联系通过金数据推送到邮箱，不暴露真实邮箱防骚扰。",
+ how:"有更新直接用 AI 改本地静态页内容 → push 到 GitHub 自动更新网站。",
+ url:"https://roborave.itccc.app/",shot:"roborave-site.jpg",
+ notes:[{t:"1228",id:"MjEyODcxMjM5"}]},
+{c:"web",n:"2026 Botball 场地一览",d:"2026-01",s:"live",tags:["Botball","素材库"],
+ desc:"2026 Botball 比赛场地 3D 交互一览：道具布局立体展示，帮助队伍直观理解场地结构与道具位置。",
+ how:"直接浏览，拖动旋转查看场地细节。",
+ url:"https://2026-botball-table-viewer.itccc.app",shot:"table-viewer.jpg",
+ notes:[{t:"0114",id:"MjE2MDM4OTMy"}]},
 {c:"web",n:"Future City 英文站",d:"2026-05",s:"live",tags:["官网页"],
  desc:"未来之城中国站英文官网：2026 Summer Showcase（杭州）介绍、报名与关键日期。",
  how:"直接浏览。",
@@ -256,11 +353,6 @@ const TOOLS = [
  how:"输入姓名或队号（如 QA-001）→ 点查询 → 在地图上定位；地图可缩放。",
  url:"https://bb-team-finder.itccc.app",shot:"bb-team-finder.jpg",
  notes:[{t:"0804",id:"MjUwMTM2NDU4"}]},
-{c:"web",n:"JBC 任务打印工具",d:"2026-03",s:"live",tags:["JBC","打印PDF","命题出题"],
- desc:"任务 PDF 按级别分类、四页合并为 1 页，多页输出自动拆分（入门级 A/B、PRE 自动拆为单页 PDF），并统计输出文件数。",
- how:"PowerPoint 先把任务导出为 PDF → 上传 → 配置各级别页码范围 → 生成并下载。",
- url:"https://renwudayin.itccc.app",shot:"renwudayin.jpg",
- notes:[{t:"0324",id:"MjI3ODEwNDM0"}]},
 {c:"web",n:"IEYI 作品一览查询",d:"2026-07",s:"live",tags:["IEYI","查询入口","Coze"],
  desc:"2026 IEYI 166 件作品查询：按国家/主题/组别筛选，支持关键词搜作品，可按评委编号反查负责队伍；条目展开中英双语简介。",
  how:"下拉选筛选条件或输入评委编号（如 J07）→ 查询负责队伍。",
@@ -294,15 +386,20 @@ const TOOLS = [
  desc:"把内容汇集到一个品牌 app 下的构想（参考 husky-app）。",
  how:"待启动。",
  notes:[{t:"0511",id:"MjM2MTIwOTM0"}]},
+{c:"web",n:"JBC 社区",d:"2025-12",s:"idea",tags:["JBC","社区"],
+ desc:"参考拓竹社区做一个 JBC 社区：提供地图编辑器、积分累计、绑定飞书、用户 vote。",
+ how:"待启动。",
+ notes:[{t:"1230",id:"MjEzMjU3MTEw"}]},
 {c:"web",n:"2026 IEYI newsletter",d:"2026-03",s:"idea",tags:["IEYI"],
  desc:"2026 IEYI 新闻通讯（占位记录）。",
  how:"待启动。",
  notes:[{t:"0304",id:"MjI0MTY2NTg4"}]},
 
-/* ---------- 道具与周边 ---------- */
-{c:"props",n:"RR 定位精英图纸生成器",d:"2026-08",s:"live",tags:["RoboRAVE","生成器","道具图纸"],
- desc:"定位精英赛场图纸生成：自定义棋盘行列与分值权重（蓝50/橙20/红10/空白），拖拽换位、单击换色，中央区可上传 LOGO 与文字，导出 19193×4724 全尺寸 JPG（对应 195×48cm 打印）。",
- how:"左侧设置行列/权重/格线/字号 → 预览区拖拽与点击调整 → 满意后导出 JPG 送印。",
+/* ================= 道具与周边 ================= */
+{c:"props",n:"RoboRAVE 定位精英图纸生成器",d:"2026-08",s:"live",tags:["RoboRAVE","生成器","道具图纸"],
+ desc:"RoboRAVE 定位精英赛场图纸生成器：自定义得分区棋盘，实时预览，导出全尺寸 JPG 送印。",
+ list:["设置得分区格子的行和列：开放挑战 4×6，国际大会 5×7","调整权重生成不同数量比例的分值","拖拽任意格子到另一格可交换位置","单击格子循环切换 蓝50 → 橙20 → 红10 → 空白","中央区可上传 LOGO 与文字，导出 19193×4724 全尺寸 JPG（对应 195×48cm 打印）"],
+ how:"左侧设置行列/权重/样式 → 预览区拖拽与点击调整 → 满意后导出 JPG。",
  url:"https://tuzhishengchengqi-rr-dingweijingying.itccc.app",shot:"rr-tuzhi.jpg",
  notes:[{t:"0828",id:"MjUzOTUwNDUz"}]},
 {c:"props",n:"奖牌奖杯授牌总览",d:"2026-08",s:"live",tags:["道具图纸","豆包"],
@@ -310,8 +407,12 @@ const TOOLS = [
  how:"打开链接 → 左侧筛选 → 卡片视图浏览；需修改进编辑模式（豆包/飞书账号）。",
  url:"https://f4u2us8y77.aiforce.cloud/app/app_17cujeacv4j",shot:"aiforce-medal.jpg",
  notes:[{t:"0825",id:"MjUzNTg2MDY2"}]},
+{c:"props",n:"Botguy 主题动画",d:"2026-01",s:"idea",tags:["Botguy","IP内容"],
+ desc:"开源漫剧 app（8 天开发）可约束角色形象，做 Botguy 专用版本生成动画内容。",
+ how:"待启动：选定开源方案后约束 Botguy 角色。",
+ notes:[{t:"0106",id:"MjE0NDYxNzky"}]},
 
-/* ---------- 数据与调研 ---------- */
+/* ================= 数据与调研 ================= */
 {c:"data",n:"a16z Charts 中文简报",d:"2026-08",s:"live",tags:["数据分析","素材库"],
  desc:"a16z《Charts of the Week》中文译介站：每周筛选图表，保留原始数据并补中文解读，按期次归档，仅作非商业研究学习用途。",
  how:"直接浏览各期；期次归档页可回看历史。",
@@ -322,15 +423,6 @@ const TOOLS = [
  how:"打开链接浏览图表；维护方法见配套文档 coze.cn/s/vZx185Mx8ag/。",
  url:"https://www.coze.cn/s/zjgQBVZyhsE/",shot:"jbc-charts.jpg",
  notes:[{t:"0829",id:"MjU0MDkxOTYy"}]},
-{c:"data",n:"Bebras 计算思维选题报告",d:"2026-04",s:"live",tags:["Bebras","命题出题","Coze"],
- desc:"计算思维题目精选报告（小学 4-6 年级）：按难度分级、题目图片全嵌入，附统计卡片与快速索引，支持打印；配套众包校错机制（除虫换积分/证书/进学术委员会）。",
- how:"打开链接浏览题目与索引 → 需要纸质时直接打印。",
- url:"https://www.coze.cn/s/aFowjgxyvLo/",shot:"ct-tasks.jpg",
- notes:[{t:"0415",id:"MjMxNjM0NDk0"},{t:"0413",id:"MjMxMjM0NDM5"}]},
-{c:"data",n:"计算思维题库知识库",d:"2026-04",s:"internal",tags:["Bebras","知识库"],
- desc:"Coze + 本地 Claude Code 三层架构（原始素材 / AI 整理知识 / 规则文件），操作只有录入、查询、修复；能出知识点 wiki、分析报告，还能组卷。",
- how:"Coze 云电脑（Paseo / Claude Code）内按三层结构维护。",
- notes:[{t:"T426",id:"MjMxMjM0NDM5"},{t:"T427",id:"MjMxMDQ1NDI5"}]},
 {c:"data",n:"JBC 客户画像分析",d:"2026-06",s:"internal",tags:["JBC","调研","数据分析"],
  desc:"按大区与参与级别统计机构画像：识别人数多的大机构、覆盖级别多的机构、腰部、小机构、新机构；计划叠加两年数据看增减与流失。",
  how:"把分析提示词交给 AI 产出分类统计报告。",
@@ -347,12 +439,20 @@ const TOOLS = [
  desc:"把 IEYI 报名表自动拆分为标准行数据的 skill。",
  how:"对 AI 说「请拆分这个 IEYI 报名表」即可。",
  notes:[{t:"0410",id:"MjMwODIzMDAw"}]},
+{c:"data",n:"任务难度评估系统",d:"2026-01",s:"idea",tags:["成绩统计","数据分析"],
+ desc:"把成绩统计封装为自动化模块：裁判直接录入队伍完成情况并获得时间戳，统计完成后上传即自动生成图表；用区域、机构参与年数、往期各级别获奖数、队员平均年龄四个变量综合评估任务难度，颗粒度可细到逐题耗时，替代赛后手工整理图表的长反馈周期。",
+ how:"待启动：先在亚洲分会报名数据中补字段，从亚洲分会段开始分析。",
+ notes:[{t:"T168",id:"MjEzODUxMjEw"}]},
+{c:"data",n:"Robotex 公众号拆解",d:"2026-02",s:"idea",tags:["信息雷达","调研"],
+ desc:"抓取 Robotex 去年的所有公众号推文，分析内容与运营节奏。",
+ how:"待启动。",
+ notes:[{t:"0220",id:"MjIxOTM3NzM4"}]},
 {c:"data",n:"竞对日报",d:"2026-03",s:"idea",tags:["信息雷达","调研"],
  desc:"每日日报：抓取竞对公众号及相关信息（后并入信息雷达，用 anything-to-notebooklm 抓公众号）。",
  how:"待重启：抓取与推送链路再评估。",
  notes:[{t:"T141",id:"MjIzNTAxMTg5"}]},
 
-/* ---------- 护照与出行 ---------- */
+/* ================= 护照与出行 ================= */
 {c:"travel",n:"Passport MRZ Reader",d:"2026-04",s:"internal",tags:["护照签证","工具库"],
  desc:"护照 MRZ 信息提取 + 有效期检查，27 分钟长程开发，已封装为可直接运行的安装包；核心卖点「本地运行不上云」。后续可扩展身份证、港澳通行证等证件，也可作为赋能合作方的服务工具。",
  how:"本机运行安装包，扫描/导入护照图片即提取信息。",
@@ -362,7 +462,7 @@ const TOOLS = [
  how:"本地运行：导入 Excel（或护照照片）→ 生成邀请函。",
  notes:[{t:"0315",id:"MjI2MTY2OTA4"},{t:"0603",id:"MjQwMDU5ODUx"},{t:"0326",id:"MjI4MTE0MjQ5"}]},
 
-/* ---------- 内部运营 ---------- */
+/* ================= 内部运营 ================= */
 {c:"ops",n:"报销填报指引助手",d:"2026-09",s:"live",tags:["报销","自动化"],
  desc:"用自然语言描述报销事项（什么事+金额+有无发票+项目名），生成钉钉综合申请表的填报指引；含出差补助、选项总览、规则与待确认标注。只输出建议、不代替提交。",
  how:"输入报销描述 → 生成填报指引 → 复制文字版照着填；带「待确认」标记的项人工复核。",
@@ -378,6 +478,28 @@ const TOOLS = [
  how:"粘贴 qr61.cn 分享链接 → 点「解析并获取文件」。",
  url:"https://caoliao2pdf.itccc.app",shot:"caoliao2pdf.jpg",
  notes:[{t:"0417",id:"MjMyMDAzNDY0"}]},
+{c:"ops",n:"ITCCC 跑团数据表",d:"2025-12",s:"live",tags:["跑团","数据分析"],
+ desc:"跑团年度跑步数据统计（RunningGraph，接 Supabase 数据库）：总里程、跑步次数、参与人数、平均单次、单次最长，每周里程堆积图按成员筛选，可导出图片；输入端后续接 Coze 支持自然语言导入。",
+ how:"打开查看统计，勾选成员看个人曲线；点「查看往年数据」回看历史。",
+ url:"https://run.itccc.app",shot:"run-club.jpg",
+ notes:[{t:"T448",id:"MjEyNjQ1Mjcz"}]},
+{c:"ops",n:"PromptFill 提示词填空器",d:"2025-12",s:"live",tags:["工具库","写作"],
+ desc:"本地部署的 PromptFill：把提示词模板化为 {填空} 块，点选替换变量快速生成提示词，一种更好的提示词管理工具。",
+ how:"打开页面 → 在模板中点选/输入填空值 → 复制生成结果。",
+ url:"https://stylebook.itccc.app/",shot:"stylebook.jpg",
+ notes:[{t:"T445",id:"MjEyNjQ4MzY1"}]},
+{c:"ops",n:"童声嘴替小山西 TTS（初版）",d:"2025-11",s:"internal",tags:["配音","工具库"],
+ desc:"课件配音工具初版（火山引擎语音合成 + 百度秒哒）：把 PPT 文字转童声语音，文件名取录入文字前 10 字，简化了原小程序「数量限制、长度限制、文件名乱序」的流程；后演进为 peiyin2.itccc.app 2.0（peiyin.itccc.app 跳转域名）。",
+ how:"网页版粘贴文字 → 生成 → 下载；supabase 服务器长期不用会自动关闭，需登录秒哒手动重启。",
+ notes:[{t:"T456",id:"MjA1MjAyMTQ2"},{t:"0108",id:"MjE0ODI4MDI0"}]},
+{c:"ops",n:"CIPP 队伍信息拆分",d:"2026-01",s:"internal",tags:["国际活动","自动化"],
+ desc:"把 5 张按队伍编号（101–105）的 CIPP 报名 Excel 合并拆分为每人一行：文件名前缀与序号组合成唯一编号（101-1、102-1…），增加 Type 列区分 Student / Instructor，输出 byPerson 表。",
+ how:"本地处理目录下 5 张 Excel → 输出 2025-CIPP-ForeignTeamInfo-byPerson.xlsx。",
+ notes:[{t:"T443",id:"MjEzNTM2ODgz"}]},
+{c:"ops",n:"国际联系人 CRM",d:"2025-12",s:"internal",tags:["客户管理","国际活动"],
+ desc:"国际项目联系人管理系统：⚠️含联系人信息，仅本地保存、不能部署到线上；后续可同步飞书或钉钉多维表，呈现方式可参考 WRO 成员国页面。",
+ how:"本地使用。",
+ notes:[{t:"1228",id:"MjEyODgxNjEz"}]},
 {c:"ops",n:"夜班自动机 · 会话周历页",d:"2026-10",s:"internal",tags:["夜班","ZCode"],
  desc:"把一个月的 ZCode 工作 46 条会话填进甘特周历：周历/月视图/一览表三视图，按画面/完成/类型/组件四种配色，右侧会话详情。",
  how:"本地打开 nightshift/ 页面；有新工作往 ITEMS 数组加一行。",
@@ -426,13 +548,13 @@ const TOOLS = [
  how:"待启动。",
  notes:[{t:"0424",id:"MjMzMjc2MTM4"}]},
 {c:"ops",n:"钉钉 CRM",d:"2026-05",s:"idea",tags:["客户管理","钉钉"],
- desc:"参考企业微信做法在钉钉搭 CRM：面聊转化为数据表记录，跟进结果自动回写。",
+ desc:"参考企业微信做法在钉钉搭 CRM：面聊转化为数据表记录，跟进结果自动回写；另一版本构想是用聊天界面沟通的 CRM。",
  how:"待启动。",
- notes:[{t:"0506",id:"MjM1MjY0OTUy"}]},
+ notes:[{t:"0506",id:"MjM1MjY0OTUy"},{t:"T147",id:"MjIyMTAzOTU2"}]},
 {c:"ops",n:"小龙虾（智能体）用途清单",d:"2026-03",s:"idea",tags:["自动化","智能体"],
- desc:"OpenClaw/智能体能接的工作总清单：官网监控、友商公众号日报、报名数据、Bebras 题库分析、JBC 金奖进度播报、wiki 答疑、道具分装表、日程看板等。",
+ desc:"OpenClaw/智能体能接的工作总清单：官网监控、友商公众号日报、报名数据、Bebras 题库分析、JBC 金奖进度播报、wiki 答疑、道具分装表、日程看板等；另含 flomo 数据导出后交给小龙虾分类整理、产出洞察的构想。",
  how:"逐项孵化为独立自动化。",
- notes:[{t:"T136",id:"MjI0ODYxMjk4"}]},
+ notes:[{t:"T136",id:"MjI0ODYxMjk4"},{t:"T146",id:"MjIyMTA0NzUx"}]},
 {c:"ops",n:"官网自动扫描",d:"2026-03",s:"live",tags:["自动化","信息雷达"],
  desc:"每天扫描 RR 官网和 Botball team homebase，解决信息同步不及时的问题（已跑通）。",
  how:"自动化定时任务，产出同步提醒。",
@@ -453,7 +575,6 @@ function renderSide(){
     stCnt[t.s]=(stCnt[t.s]||0)+1;
     for(const g of (t.tags||[])) tagCnt[g]=(tagCnt[g]||0)+1;
   }
-  const stCntAll = TOOLS.length;
   const tags = Object.entries(tagCnt).filter(([,n])=>n>=2).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],"zh"));
   document.getElementById("side").innerHTML = `
   <div class="group"><h4>分类 · CATEGORIES</h4>
@@ -461,7 +582,7 @@ function renderSide(){
     ${CATS.map(c=>`<button class="fitem ${curCat===c.id?"on":""}" data-k="cat" data-v="${c.id}">${c.icon} ${c.name}<span class="cnt">${catCnt[c.id]||0}</span></button>`).join("")}
   </div>
   <div class="group"><h4>状态 · STATUS</h4>
-    ${STATUSES.map(s=>`<button class="fitem ${curStatus===s.id?"on":""}" data-k="status" data-v="${s.id}">${s.name}<span class="cnt">${s.id==="all"?stCntAll:(stCnt[s.id]||0)}</span></button>`).join("")}
+    ${STATUSES.map(s=>`<button class="fitem ${curStatus===s.id?"on":""}" data-k="status" data-v="${s.id}">${s.name}<span class="cnt">${s.id==="all"?TOOLS.length:(stCnt[s.id]||0)}</span></button>`).join("")}
   </div>
   <div class="group"><h4>标签 · TAGS</h4>
     <div class="tagpool">${tags.map(([g,n])=>`<button class="tagbtn ${curTag===g?"on":""}" data-k="tag" data-v="${g}">${g} ${n}</button>`).join("")}</div>
@@ -486,11 +607,13 @@ function card(t){
   const foot = t.url
     ? `<a class="siteurl" href="${t.url}" target="_blank" rel="noopener" title="${t.url}">${host(t.url)} ↗</a>`
     : `<span class="nosite">${t.s==="idea"?"想法 · 未上线":"内部工具"}</span>`;
+  const listHtml = (t.list&&t.list.length) ? `<ul class="plist">${t.list.map(x=>`<li>${x}</li>`).join("")}</ul>` : "";
   return `<article class="card" data-c="${t.c}">
     ${shot}
     <div class="body">
       <div class="titlerow"><h3>${t.n}</h3><span class="badge ${bc}">${bt}</span><span class="date">${t.d}</span></div>
       <p class="desc">${t.desc}</p>
+      ${listHtml}
       <p class="how"><b>怎么用</b>${t.how}</p>
       <div class="tagrow">${(t.tags||[]).map(g=>`<button class="t ${curTag===g?"on":""}" data-k="tag" data-v="${g}">${g}</button>`).join("")}</div>
     </div>
@@ -504,7 +627,7 @@ function render(){
     (curCat==="all"||t.c===curCat) &&
     (curStatus==="all"||t.s===curStatus) &&
     (!curTag || (t.tags||[]).includes(curTag)) &&
-    (!curQ || (t.n+t.desc+t.how+(t.tags||[]).join()).toLowerCase().includes(curQ)));
+    (!curQ || (t.n+t.desc+t.how+(t.tags||[]).join()+(t.list||[]).join()).toLowerCase().includes(curQ)));
   let html="", shown=0;
   for(const cat of CATS){
     const items = filtered.filter(t=>t.c===cat.id);
